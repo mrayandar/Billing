@@ -5,6 +5,7 @@ import "dotenv/config";
 import bcrypt from "bcryptjs";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
+import { DEV_PASSWORD, PERMISSIONS } from "../src/lib/permission-keys";
 
 const db = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
@@ -13,27 +14,6 @@ const db = new PrismaClient({
 const rs = (rupees: number) => rupees * 100; // rupees -> paisa
 const pct = (percent: number) => percent * 100; // percent -> basis points
 
-const PERMISSIONS: Record<string, string> = {
-  "billing.create": "Make retail and wholesale bills",
-  "billing.change_price": "Change the price on a bill line",
-  "billing.cancel": "Cancel a saved bill",
-  "discount.override_client": "Change a wholesale discount away from the client's agreed %",
-  "items.edit": "Add and edit items and base prices",
-  "client_rules.edit": "Edit client company discounts and book rules",
-  "clients.edit": "Add and edit clients",
-  "cost.view": "See cost price and profit",
-  "purchases.manage": "Enter purchases and manage suppliers",
-  "stock.adjust": "Adjust stock",
-  "returns.manage": "Accept returns",
-  "payments.receive": "Receive payments from clients",
-  "payments.make": "Make payments to suppliers",
-  "ledger.view": "See ledgers and statements",
-  "expenses.manage": "Record expenses",
-  "reports.view": "See reports",
-  "users.manage": "Manage users and roles",
-  "settings.manage": "Change system settings",
-  "audit.view": "See the audit log",
-};
 
 const ROLES: { name: string; limitPct: number; permissions: string[] }[] = [
   { name: "Owner", limitPct: 100, permissions: Object.keys(PERMISSIONS) },
@@ -75,12 +55,12 @@ async function main() {
     });
     roleId[r.name] = role.id;
   }
-  const passwordHash = await bcrypt.hash("changeme123", 10);
+  const passwordHash = await bcrypt.hash(DEV_PASSWORD, 10);
   const owner = await db.user.create({
-    data: { username: "owner", name: "Owner", passwordHash, roleId: roleId.Owner },
+    data: { username: "owner", name: "Owner", passwordHash, mustChangePassword: true, roleId: roleId.Owner },
   });
-  await db.user.create({ data: { username: "manager", name: "Manager", passwordHash, roleId: roleId.Manager } });
-  await db.user.create({ data: { username: "cashier", name: "Cashier", passwordHash, roleId: roleId.Cashier } });
+  await db.user.create({ data: { username: "manager", name: "Manager", passwordHash, mustChangePassword: true, roleId: roleId.Manager } });
+  await db.user.create({ data: { username: "cashier", name: "Cashier", passwordHash, mustChangePassword: true, roleId: roleId.Cashier } });
 
   // ── Devices (each has its own bill number series) ──
   await db.device.create({ data: { name: "Counter 1", billPrefix: "C1" } });
@@ -238,7 +218,7 @@ async function main() {
     },
   });
 
-  console.log("Sample data added. Log-in users: owner, manager, cashier. Password for all: changeme123");
+  console.log("Sample data added. Log-in users: owner, manager, cashier. Password for all: changeme123 (each must set a new one at first login)");
 }
 
 main()

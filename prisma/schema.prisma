@@ -165,6 +165,12 @@ model User {
   createdAt    DateTime @default(now())
   role         Role     @relation(fields: [roleId], references: [id])
 
+  // Must set a new password at next login (new users, owner resets).
+  mustChangePassword Boolean   @default(false)
+  // Locked for 5 minutes after 5 wrong passwords; the owner can unlock.
+  failedLogins       Int       @default(0)
+  lockedUntil        DateTime?
+
   @@map("users")
 }
 

@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
+/* Colours and fonts follow the screen designs (docs/designs). */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f3ef;
+  --foreground: #1b1f24;
+  --accent: #0b6b66;
+  --accent-dark: #084f4b;
+  --accent-soft: #e3f1ef;
+  --line: #dedbd3;
+  --field: #c9c5bb;
+  --muted: #5b6168;
+  --danger: #8e2f21;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--line);
+  --color-field: var(--field);
+  --color-muted: var(--muted);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+  --font-urdu: var(--font-urdu), serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Touch-friendly inputs and buttons (at least 44 px tall). */
+.input {
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid var(--field);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0 12px;
+  font-size: 16px;
+}
+.btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--field);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0 14px;
+  cursor: pointer;
+}
+.btn-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 16px;
 }
