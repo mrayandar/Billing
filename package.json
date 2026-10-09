@@ -10,7 +10,8 @@
     "test": "vitest run",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:migrate:test": "node scripts/migrate-test.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",

@@ -2,7 +2,7 @@
 // rolled back, so they leave no users and no audit rows behind.
 import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { afterAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { authenticate, can, changeOwnPassword, loadUser, verifyApprover } from "./auth-core";
 import { db } from "./db";
 import type { Db } from "./db-types";
@@ -39,6 +39,10 @@ async function makeUser(tx: Db, roleId: number, username: string, password = "ri
     data: { username, name: username, roleId, passwordHash: await bcrypt.hash(password, 4), ...extra },
   });
 }
+
+beforeAll(() => {
+  if (process.env.TEST_DB_PROBLEM) throw new Error(process.env.TEST_DB_PROBLEM);
+});
 
 afterAll(() => db.$disconnect());
 
