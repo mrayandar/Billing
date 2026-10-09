@@ -12,3 +12,8 @@ export const db =
   });
 
 if (process.env.NODE_ENV !== "production") globalForDb.db = db;
+
+// Run several writes as one all-or-nothing unit (a failed step undoes the others).
+export function transact<T>(fn: (tx: Parameters<Parameters<typeof db.$transaction>[0]>[0]) => Promise<T>) {
+  return db.$transaction(fn, { timeout: 30_000, maxWait: 15_000 });
+}

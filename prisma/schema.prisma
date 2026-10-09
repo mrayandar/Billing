@@ -8,12 +8,14 @@
 //    a client or supplier balance = sum of ledger_entries.
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider   = "postgresql"
+  extensions = [pg_trgm]
 }
 
 // ───────────── Enums ─────────────
@@ -198,6 +200,7 @@ model Company {
   clientDiscounts   ClientCompanyDiscount[]
   supplierDiscounts SupplierCompanyDiscount[]
 
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin)
   @@map("companies")
 }
 
@@ -245,10 +248,26 @@ model Item {
   returnLines   ReturnLine[]
   movements     StockMovement[]
 
-  @@index([name])
-  @@index([isbn])
+  // Fast "any part of a word" search (PM-08) uses trigram indexes.
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin)
+  @@index([nameUrdu(ops: raw("gin_trgm_ops"))], type: Gin)
+  @@index([author(ops: raw("gin_trgm_ops"))], type: Gin)
+  @@index([searchSpelling(ops: raw("gin_trgm_ops"))], type: Gin)
+  @@index([isbn(ops: raw("gin_trgm_ops"))], type: Gin)
   @@index([companyId])
+  @@index([categoryId])
   @@map("items")
+}
+
+// Every short code ever given to an item. A code is never reused, even if the item is
+// renamed away from it or removed (BE-01).
+model ItemCode {
+  code      String   @id
+  itemId    Int
+  createdAt DateTime @default(now())
+
+  @@index([itemId])
+  @@map("item_codes")
 }
 
 model ItemBarcode {

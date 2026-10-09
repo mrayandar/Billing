@@ -20,7 +20,8 @@ Web-based retail and wholesale billing for a book and stationery shop. Used at s
 ## Commands
 - Run the app: `npm run dev`
 - Run tests: `npm test`
-- Database changes: `npx prisma migrate dev` (or `npm run db:migrate`)
+- Database changes: `npx prisma migrate dev` (or `npm run db:migrate`), then `npm run db:migrate:test` for the test branch
+- Sample data: `npm run db:seed` (skips if users already exist)
 
 ## Business rules (do not change without asking)
 - **Money** is stored as integer paisa (Rs. 1 = 100). Never use floating point for money.

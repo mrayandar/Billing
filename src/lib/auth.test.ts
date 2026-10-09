@@ -1,48 +1,15 @@
 // These tests run against the development database inside a transaction that is always
 // rolled back, so they leave no users and no audit rows behind.
 import "dotenv/config";
-import bcrypt from "bcryptjs";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { authenticate, can, changeOwnPassword, loadUser, verifyApprover } from "./auth-core";
 import { db } from "./db";
 import type { Db } from "./db-types";
 import { DEV_PASSWORD, LOGIN_LOCK_AFTER } from "./permission-keys";
+import { assertTestDatabase, inRollback, makeRole, makeUser } from "./test-helpers";
 import { changeRole, createUser, resetPassword, setActive, unlockUser } from "./users";
 
-class Rollback extends Error {}
-
-async function inRollback(fn: (tx: Db) => Promise<void>) {
-  try {
-    await db.$transaction(
-      async (tx) => {
-        await fn(tx);
-        throw new Rollback();
-      },
-      { timeout: 60_000, maxWait: 20_000 },
-    );
-  } catch (e) {
-    if (!(e instanceof Rollback)) throw e;
-  }
-}
-
-async function makeRole(tx: Db, name: string, permissions: string[]) {
-  for (const key of permissions) {
-    await tx.permission.upsert({ where: { key }, update: {}, create: { key, description: key } });
-  }
-  return tx.role.create({
-    data: { name, permissions: { create: permissions.map((permissionKey) => ({ permissionKey })) } },
-  });
-}
-
-async function makeUser(tx: Db, roleId: number, username: string, password = "right-password-1", extra = {}) {
-  return tx.user.create({
-    data: { username, name: username, roleId, passwordHash: await bcrypt.hash(password, 4), ...extra },
-  });
-}
-
-beforeAll(() => {
-  if (process.env.TEST_DB_PROBLEM) throw new Error(process.env.TEST_DB_PROBLEM);
-});
+beforeAll(assertTestDatabase);
 
 afterAll(() => db.$disconnect());
 
