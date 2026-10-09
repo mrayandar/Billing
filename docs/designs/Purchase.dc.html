@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Purchase entry</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<nav aria-label="Purchases section" style="display: flex; align-self: flex-start; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<a href="Purchase.dc.html" aria-current="page" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600">New purchase</a>
+<a href="Suppliers.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Suppliers</a>
+<a href="#" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Purchase orders</a>
+<a href="#" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Purchase returns</a>
+</nav>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">New purchase <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #5B6168; font-weight: 500">P-0388</span></h1>
+<span style="color: #5B6168">Saving adds stock, updates cost and adds to the supplier's balance</span>
+</div>
+
+<section aria-label="Supplier" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 260px">
+<label for="sup" style="font-size: 12px; color: #5B6168">Supplier</label>
+<input id="sup" value="Oxford University Press" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-weight: 600">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 180px">
+<label for="inv" style="font-size: 12px; color: #5B6168">Supplier invoice no.</label>
+<input id="inv" value="OUP-77421" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 150px">
+<label for="pdate" style="font-size: 12px; color: #5B6168">Invoice date</label>
+<input id="pdate" value="2 Oct 2026" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #5B6168">Supplier balance</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">Rs. 212,600</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #5B6168">Default discount</span>
+<span>Oxford 30% <span style="color: #5B6168">· 2 item exceptions</span></span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<div style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="Add item" style="background: #FFFFFF; border: 2px solid {{accent}}; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px; width: 96px">
+<label for="pcode" style="font-size: 12px; color: #5B6168">Code or ISBN</label>
+<input id="pcode" value="1103" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 200px; min-width: 0">
+<span style="font-size: 12px; color: #5B6168">Item</span>
+<div style="border: 1px solid #E5E2DA; background: #FAF9F6; border-radius: 6px; padding: 9px 10px; font-size: 15px">Oxford Science 8 <span style="color: #5B6168">· stock 4</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 104px">
+<label for="pprinted" style="font-size: 12px; color: #5B6168">Printed price</label>
+<input id="pprinted" value="1,280" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 80px">
+<label for="pqty" style="font-size: 12px; color: {{accent}}; font-weight: 600">Qty</label>
+<input id="pqty" value="50" style="border: 2px solid {{accent}}; outline: 3px solid #BFE0DC; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 80px">
+<label for="pdisc" style="font-size: 12px; color: #5B6168">Disc %</label>
+<input id="pdisc" value="30" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 80px">
+<span style="font-size: 12px; color: #5B6168">Rate</span>
+<div style="padding: 9px 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">896</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 96px">
+<span style="font-size: 12px; color: #5B6168">Amount</span>
+<div style="padding: 9px 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; text-align: right">44,800</div>
+</div>
+<button style="background: {{accent}}; color: #FFFFFF; border: 0; border-radius: 6px; padding: 0 18px; min-height: 44px; font-weight: 600">Add ⏎</button>
+</div>
+</section>
+
+<section aria-label="Purchase lines" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px">
+<h2 style="margin: 0 0 8px; font-size: 15px; font-weight: 600">4 lines · 220 units</h2>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 720px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500">Code</th>
+<th style="padding: 6px 8px; font-weight: 500">Item</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Printed</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Qty</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Disc</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Rate</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Amount</th>
+<th style="padding: 6px 8px; font-weight: 500"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th>
+</tr></thead>
+<tbody style="font-family: 'IBM Plex Mono', monospace">
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">1045</td><td style="padding: 8px; font-family: 'IBM Plex Sans', sans-serif">Oxford Primary English 5</td><td style="padding: 8px; text-align: right">850</td><td style="padding: 8px; text-align: right">100</td><td style="padding: 8px; text-align: right">30%</td><td style="padding: 8px; text-align: right">595</td><td style="padding: 8px; text-align: right">59,500</td><td style="padding: 4px 8px; text-align: right"><button aria-label="Edit line 1" style="border: 0; background: transparent; width: 36px; height: 36px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button></td></tr>
+<tr style="border-top: 1px solid #ECE9E2; background: #FFF8EA"><td style="padding: 8px">3307</td><td style="padding: 8px; font-family: 'IBM Plex Sans', sans-serif">Oxford Social Studies 4 <span style="display: block; font-size: 12px; color: #7A4E00">New printed price (was 720): base price becomes 780, old stock keeps 720</span></td><td style="padding: 8px; text-align: right; font-weight: 600">780</td><td style="padding: 8px; text-align: right">40</td><td style="padding: 8px; text-align: right">30%</td><td style="padding: 8px; text-align: right">546</td><td style="padding: 8px; text-align: right">21,840</td><td style="padding: 4px 8px; text-align: right"><button aria-label="Edit line 2" style="border: 0; background: transparent; width: 36px; height: 36px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">1102</td><td style="padding: 8px; font-family: 'IBM Plex Sans', sans-serif">Oxford Science 7</td><td style="padding: 8px; text-align: right">1,200</td><td style="padding: 8px; text-align: right">60</td><td style="padding: 8px; text-align: right">30%</td><td style="padding: 8px; text-align: right">840</td><td style="padding: 8px; text-align: right">50,400</td><td style="padding: 4px 8px; text-align: right"><button aria-label="Edit line 3" style="border: 0; background: transparent; width: 36px; height: 36px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">1150</td><td style="padding: 8px; font-family: 'IBM Plex Sans', sans-serif">Oxford Atlas for Pakistan <span style="font-size: 12px; color: #5B6168">· item exception</span></td><td style="padding: 8px; text-align: right">2,500</td><td style="padding: 8px; text-align: right">20</td><td style="padding: 8px; text-align: right">25%</td><td style="padding: 8px; text-align: right">1,875</td><td style="padding: 8px; text-align: right">37,500</td><td style="padding: 4px 8px; text-align: right"><button aria-label="Edit line 4" style="border: 0; background: transparent; width: 36px; height: 36px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section aria-label="Totals" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Items</span><span style="font-family: 'IBM Plex Mono', monospace">169,240</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><label for="freight" style="color: #5B6168">Freight</label><input id="freight" value="1,200" style="width: 90px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace"></div>
+<span style="font-size: 12px; color: #5B6168">Spread across items by value, so each item's cost includes it</span>
+<div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #DEDBD3; padding-top: 10px"><span style="font-weight: 600">Invoice total</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600">170,440</span></div>
+</section>
+<section aria-label="Payment" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div role="group" aria-label="Payment status" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Unpaid</button>
+<button aria-pressed="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 44px; font-weight: 600">Part paid</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Paid</button>
+</div>
+<div style="display: flex; align-items: center; gap: 10px"><label for="paid" style="font-size: 13px; color: #5B6168; white-space: nowrap">Paid now (bank)</label><input id="paid" value="100,000" style="flex: 1; min-width: 0; border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; text-align: right; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; justify-content: space-between; font-weight: 600"><span>To supplier balance</span><span style="font-family: 'IBM Plex Mono', monospace">70,440</span></div>
+</section>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 48px">Print labels (220)</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 48px">Save draft</button>
+<button style="grid-column: 1 / span 2; border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 52px; font-size: 16px; font-weight: 600">Save purchase</button>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px 16px; font-size: 13px">
+<strong>3 customer requests</strong> are waiting for Oxford Science 8. They'll get a WhatsApp message when this purchase is saved.
+</div>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

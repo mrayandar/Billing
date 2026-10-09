@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Returns</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">U</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">New return</h1>
+<div role="tablist" aria-label="Return type" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<button role="tab" aria-selected="true" style="border: 0; background: {{accent}}; color: #FFFFFF; padding: 0 16px; min-height: 42px; font-weight: 600">Against a bill</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 16px; min-height: 42px">Season-end (wholesale)</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 16px; min-height: 42px">Without bill</button>
+</div>
+</div>
+
+<section aria-label="Find bill" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="rbill" style="font-size: 12px; color: #5B6168">Scan receipt or type bill no.</label>
+<input id="rbill" value="C1-1011" style="border: 2px solid {{accent}}; border-radius: 6px; padding: 9px 10px; width: 200px; font-family: 'IBM Plex Mono', monospace; font-size: 16px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #5B6168">Date</span><span>Wed 7 Oct 2026 · 2 days ago</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #5B6168">Customer</span><span>Walk-in · 0300-1234567</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #5B6168">Paid</span><span style="font-family: 'IBM Plex Mono', monospace">1,870 cash</span></div>
+<span style="background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 4px 10px; font-size: 13px; font-weight: 600">Within 7-day return window</span>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<section aria-label="Items on the bill" style="flex: 999 1 760px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Items on bill C1-1011</h2>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 760px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500">Item</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Sold</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Paid each</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Returning</th>
+<th style="padding: 6px 8px; font-weight: 500">Condition</th>
+<th style="padding: 6px 8px; font-weight: 500">Reason</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Refund</th>
+</tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2; background: #F3FAF9">
+<td style="padding: 8px">Oxford Science 6</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,150</td>
+<td style="padding: 6px 8px; text-align: right"><label for="rq1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Returning, Oxford Science 6</label><input id="rq1" value="1" style="width: 52px; border: 2px solid {{accent}}; border-radius: 6px; padding: 5px 7px; text-align: right; font-family: 'IBM Plex Mono', monospace"></td>
+<td style="padding: 6px 8px"><div role="group" aria-label="Condition" style="display: flex; gap: 4px"><button aria-pressed="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 34px; padding: 0 10px; font-size: 13px; font-weight: 600">Good</button><button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 34px; padding: 0 10px; font-size: 13px">Damaged</button></div></td>
+<td style="padding: 8px">Wrong class</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 600">1,150</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px">Register A4, 200 pages</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">3</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">220</td>
+<td style="padding: 6px 8px; text-align: right"><label for="rq2" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Returning, Register A4</label><input id="rq2" value="0" style="width: 52px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace"></td>
+<td style="padding: 8px; color: #5B6168">—</td>
+<td style="padding: 8px; color: #5B6168">—</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #5B6168">0</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px">Dollar Gel Pen Blue</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">2</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">30</td>
+<td style="padding: 6px 8px; text-align: right"><label for="rq3" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Returning, Dollar Gel Pen Blue</label><input id="rq3" value="0" style="width: 52px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace"></td>
+<td style="padding: 8px; color: #5B6168">—</td>
+<td style="padding: 8px; color: #5B6168">—</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #5B6168">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<span style="font-size: 13px; color: #5B6168">Only items on this bill can be returned, up to the quantity sold, at the price actually paid.</span>
+</section>
+
+<aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section aria-label="Refund" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 600">Refund</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600">Rs. 1,150</span></div>
+<div role="group" aria-label="Refund method" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<button aria-pressed="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 44px; font-weight: 600">Cash</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Credit note</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Exchange</button>
+</div>
+<span style="font-size: 13px; color: #5B6168">1 copy goes back to sellable stock. Cash refund comes from Counter 1's shift.</span>
+<button style="border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 52px; font-size: 16px; font-weight: 600">Save return and print slip</button>
+</section>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #3D4248">
+Bills older than 7 days, or returns without a bill, ask for a manager's approval before saving.
+</div>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

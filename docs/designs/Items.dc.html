@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Items</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Noto+Nastaliq+Urdu:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">Items <span style="font-size: 15px; font-weight: 400; color: #5B6168">12,480 items</span></h1>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Import price list</button>
+<a href="Labels.dc.html" style="display: inline-flex; align-items: center; border: 1px solid #C9C5BB; background: #FFFFFF; color: #1B1F24; text-decoration: none; border-radius: 8px; min-height: 44px; padding: 0 14px">Print labels</a>
+<button style="border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 16px; font-weight: 600">New item</button>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<section aria-label="Item list" style="flex: 999 1 640px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<div style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 4px">
+<label for="isearch" style="font-size: 12px; color: #5B6168">Search code, name, author or ISBN</label>
+<input id="isearch" value="oxford" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px">
+</div>
+<div style="width: 170px; display: flex; flex-direction: column; gap: 4px">
+<label for="ibrand" style="font-size: 12px; color: #5B6168">Company</label>
+<input id="ibrand" value="All companies" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px">
+</div>
+<div style="width: 200px; display: flex; flex-direction: column; gap: 4px">
+<label for="icat" style="font-size: 12px; color: #5B6168">Category</label>
+<input id="icat" value="Books › Textbooks" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px">
+</div>
+</div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap">
+<button aria-pressed="true" style="border: 0; background: #E3F1EF; color: #084F4B; border-radius: 16px; min-height: 32px; padding: 0 12px; font-size: 13px; font-weight: 600">Active</button>
+<button style="border: 1px solid #DEDBD3; background: #FFFFFF; border-radius: 16px; min-height: 32px; padding: 0 12px; font-size: 13px">Low stock</button>
+<button style="border: 1px solid #DEDBD3; background: #FFFFFF; border-radius: 16px; min-height: 32px; padding: 0 12px; font-size: 13px">Old editions</button>
+<button style="border: 1px solid #DEDBD3; background: #FFFFFF; border-radius: 16px; min-height: 32px; padding: 0 12px; font-size: 13px">No sale in 90 days</button>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 640px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500">Code</th>
+<th style="padding: 6px 8px; font-weight: 500">Item</th>
+<th style="padding: 6px 8px; font-weight: 500">Company</th>
+<th style="padding: 6px 8px; font-weight: 500">Category</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Price</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Stock</th>
+</tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1045</td><td style="padding: 8px">Oxford Primary English 5</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #5B6168">Class 5 · English</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">850</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">118</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1101</td><td style="padding: 8px">Oxford Science 6</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #5B6168">Class 6 · Science</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,150</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">42</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1102</td><td style="padding: 8px">Oxford Science 7</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #5B6168">Class 7 · Science</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,200</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">36</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1103</td><td style="padding: 8px">Oxford Science 8</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #5B6168">Class 8 · Science</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,280</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #8E2F21; font-weight: 600">4</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1150</td><td style="padding: 8px">Oxford Atlas for Pakistan</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #5B6168">Atlases</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">2,500</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">11</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1240</td><td style="padding: 8px">Oxford Science Workbook 7</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #5B6168">Class 7 · Science</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">450</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">60</td></tr>
+<tr style="border-top: 1px solid #ECE9E2; background: #E3F1EF"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 600">3307</td><td style="padding: 8px; font-weight: 600">Oxford Social Studies 4</td><td style="padding: 8px">Oxford</td><td style="padding: 8px; color: #3E5552">Class 4 · Social Studies</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">780</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">46</td></tr>
+</tbody>
+</table>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #5B6168"><span>Showing 7 of 1,284 Oxford items</span><a href="#">Next page</a></div>
+</section>
+
+<section aria-label="Item details" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">Oxford Social Studies 4</h2>
+<span style="font-family: 'IBM Plex Mono', monospace; color: #5B6168">3307</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px">
+<div style="display: flex; flex-direction: column; gap: 4px; grid-column: 1 / span 2"><label for="f-name" style="font-size: 12px; color: #5B6168">Name</label><input id="f-name" value="Oxford Social Studies 4" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; grid-column: 1 / span 2"><label for="f-urdu" style="font-size: 12px; color: #5B6168">Name in Urdu <span style="color: #5B6168">· printed when a bill is printed in Urdu</span></label><input id="f-urdu" lang="ur" dir="rtl" value="آکسفورڈ معاشرتی علوم 4" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 4px 10px; font-family: 'Noto Nastaliq Urdu', serif; font-size: 16px; line-height: 2"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-code" style="font-size: 12px; color: #5B6168">Item code</label><input id="f-code" value="3307" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-isbn" style="font-size: 12px; color: #5B6168">ISBN</label><input id="f-isbn" value="[ISBN]" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-brand" style="font-size: 12px; color: #5B6168">Company / publisher</label><input id="f-brand" value="Oxford" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-cat" style="font-size: 12px; color: #5B6168">Category</label><input id="f-cat" value="Textbooks › Class 4" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-author" style="font-size: 12px; color: #5B6168">Author</label><input id="f-author" value="[Author]" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-subject" style="font-size: 12px; color: #5B6168">Subject</label><input id="f-subject" value="Social Studies" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-price" style="font-size: 12px; color: #5B6168">Base price</label><input id="f-price" value="780" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-cost" style="font-size: 12px; color: #5B6168">Average cost <span style="color: #8E4B00">· managers</span></label><input id="f-cost" value="552" style="border: 1px solid #E5E2DA; background: #FAF9F6; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-unit" style="font-size: 12px; color: #5B6168">Unit</label><input id="f-unit" value="Piece · packet of 10" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="f-min" style="font-size: 12px; color: #5B6168">Minimum stock</label><input id="f-min" value="20" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Barcodes</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="background: #EEECE6; border-radius: 4px; padding: 3px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px">3307 · shop code</span>
+<span style="background: #EEECE6; border-radius: 4px; padding: 3px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px">[ISBN]</span>
+<button style="border: 1px dashed #C9C5BB; background: #FFFFFF; border-radius: 4px; min-height: 28px; padding: 0 8px; font-size: 13px">+ Add barcode</button>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Stock by printed price · billing sells the oldest copies first, automatically</span>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 4px 6px; font-weight: 500">Price</th><th style="padding: 4px 6px; font-weight: 500">Received</th><th style="padding: 4px 6px; font-weight: 500; text-align: right">On hand</th></tr></thead>
+<tbody style="font-family: 'IBM Plex Mono', monospace">
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 5px 6px">720</td><td style="padding: 5px 6px; font-family: 'IBM Plex Sans', sans-serif">3 Apr 2026</td><td style="padding: 5px 6px; text-align: right">6</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 5px 6px">780</td><td style="padding: 5px 6px; font-family: 'IBM Plex Sans', sans-serif">2 Oct 2026</td><td style="padding: 5px 6px; text-align: right">40</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid #ECE9E2; padding-top: 12px">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Stock ledger</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Price history</button>
+<button style="margin-left: auto; border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 18px; font-weight: 600">Save</button>
+</div>
+</section>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

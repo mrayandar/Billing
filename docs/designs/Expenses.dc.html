@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Expenses</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid #0B6B66">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<nav aria-label="Ledgers section" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<a href="Ledger.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Client ledgers</a>
+<a href="Suppliers.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Supplier ledgers</a>
+<a href="Expenses.dc.html" aria-current="page" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; background: #0B6B66; color: #FFFFFF; text-decoration: none; font-weight: 600">Expenses</a>
+<a href="ShiftClose.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Cash and shifts</a>
+</nav>
+<span style="color: #5B6168">October 2026</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<section aria-label="New expense" style="flex: 1 1 360px; min-width: 0; background: #FFFFFF; border: 2px solid #0B6B66; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">New expense</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="ex-date" style="font-size: 12px; color: #5B6168">Date</label><input id="ex-date" value="9 Oct 2026" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="ex-amount" style="font-size: 12px; color: #5B6168">Amount</label><input id="ex-amount" value="1,500" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Head</span>
+<div role="radiogroup" aria-label="Expense head" style="display: flex; flex-wrap: wrap; gap: 6px">
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 16px; min-height: 36px; padding: 0 12px">Rent</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 16px; min-height: 36px; padding: 0 12px">Salaries</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 16px; min-height: 36px; padding: 0 12px">Electricity</button>
+<button role="radio" aria-checked="true" style="border: 2px solid #0B6B66; background: #E3F1EF; border-radius: 16px; min-height: 36px; padding: 0 12px; font-weight: 600">Transport</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 16px; min-height: 36px; padding: 0 12px">Tea and refreshments</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 16px; min-height: 36px; padding: 0 12px">Repairs</button>
+<button role="radio" aria-checked="false" style="border: 1px dashed #C9C5BB; background: #FFFFFF; border-radius: 16px; min-height: 36px; padding: 0 12px">+ New head</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Paid from</span>
+<div role="radiogroup" aria-label="Paid from" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<button role="radio" aria-checked="true" style="border: 2px solid #0B6B66; background: #E3F1EF; border-radius: 6px; min-height: 40px; font-weight: 600">Drawer</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Bank</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Wallet</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="ex-note" style="font-size: 12px; color: #5B6168">Note</label><input id="ex-note" value="Delivery to City School" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<button style="border: 1px dashed #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Attach receipt photo</button>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 48px; font-weight: 600">Save expense</button>
+</section>
+
+<div style="flex: 999 1 700px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px">
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">This month</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">168,400</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">Salaries</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">95,000</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">Rent</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">60,000</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">Everything else</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">13,400</div></div>
+</div>
+<section aria-label="Expense list" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px">
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 620px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 6px 8px; font-weight: 500">Date</th><th style="padding: 6px 8px; font-weight: 500">Head</th><th style="padding: 6px 8px; font-weight: 500">Note</th><th style="padding: 6px 8px; font-weight: 500">Paid from</th><th style="padding: 6px 8px; font-weight: 500">By</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Amount</th></tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">9 Oct</td><td style="padding: 8px">Tea and refreshments</td><td style="padding: 8px; color: #5B6168">Staff tea</td><td style="padding: 8px">Drawer, Counter 1</td><td style="padding: 8px">Usman</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">700</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">7 Oct</td><td style="padding: 8px">Transport</td><td style="padding: 8px; color: #5B6168">Loader for OUP stock</td><td style="padding: 8px">Drawer, Counter 2</td><td style="padding: 8px">Bilal</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">2,400</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">5 Oct</td><td style="padding: 8px">Electricity</td><td style="padding: 8px; color: #5B6168">September bill</td><td style="padding: 8px">Bank</td><td style="padding: 8px">Owner</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">10,300</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">1 Oct</td><td style="padding: 8px">Salaries</td><td style="padding: 8px; color: #5B6168">4 staff, September</td><td style="padding: 8px">Bank</td><td style="padding: 8px">Owner</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">95,000</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">1 Oct</td><td style="padding: 8px">Rent</td><td style="padding: 8px; color: #5B6168">Shop rent, October</td><td style="padding: 8px">Bank</td><td style="padding: 8px">Owner</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">60,000</td></tr>
+</tbody>
+<tfoot><tr style="border-top: 2px solid #DEDBD3; font-weight: 600"><td style="padding: 8px" colspan="5">Total</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">168,400</td></tr></tfoot>
+</table>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

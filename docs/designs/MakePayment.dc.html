@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Make payment</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid #0B6B66">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div>
+<a href="Suppliers.dc.html" style="font-size: 13px">← Suppliers</a>
+<h1 style="margin: 4px 0 0; font-size: 22px; font-weight: 600">Make payment <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500; color: #5B6168">PY-0136</span></h1>
+</div>
+<span style="color: #5B6168">Money you pay a supplier later for stock bought on credit</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<div style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="Payment details" style="background: #FFFFFF; border: 2px solid #0B6B66; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 240px"><label for="mp-sup" style="font-size: 12px; color: #5B6168">Supplier</label><input id="mp-sup" value="Oxford University Press" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-weight: 600; font-size: 16px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 150px"><label for="mp-date" style="font-size: 12px; color: #5B6168">Date</label><input id="mp-date" value="10 Oct 2026" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 170px"><label for="mp-amount" style="font-size: 12px; color: #0B6B66; font-weight: 600">Amount paid</label><input id="mp-amount" value="150,000" style="border: 2px solid #0B6B66; outline: 3px solid #BFE0DC; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; text-align: right"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Paid by</span>
+<div role="radiogroup" aria-label="Paid by" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px">
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Cash</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Bank transfer</button>
+<button role="radio" aria-checked="true" style="border: 2px solid #0B6B66; background: #E3F1EF; border-radius: 6px; min-height: 44px; font-weight: 600">Cheque</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Mobile wallet</button>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 20px">
+<div style="display: flex; flex-direction: column; gap: 4px; width: 170px"><label for="mp-chq" style="font-size: 12px; color: #5B6168">Cheque number</label><input id="mp-chq" value="[Cheque no.]" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 200px"><label for="mp-bank" style="font-size: 12px; color: #5B6168">From account</label><input id="mp-bank" value="[Shop bank account]" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 150px"><label for="mp-chqdate" style="font-size: 12px; color: #5B6168">Cheque date</label><input id="mp-chqdate" value="15 Oct 2026" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 180px"><label for="mp-to" style="font-size: 12px; color: #5B6168">Handed to</label><input id="mp-to" placeholder="Their salesman's name" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+</div>
+<span style="background: #FBEFD9; color: #7A4E00; border-radius: 6px; padding: 8px 12px; font-size: 13px">Post-dated cheque: it shows as pending until 15 Oct, and you get a reminder to make sure the bank balance covers it.</span>
+</section>
+
+<section aria-label="Apply to purchases" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Which purchases does it pay?</h2>
+<div role="radiogroup" aria-label="Apply payment" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden">
+<button role="radio" aria-checked="true" style="border: 0; background: #0B6B66; color: #FFFFFF; padding: 0 12px; min-height: 38px; font-weight: 600">Oldest first (automatic)</button>
+<button role="radio" aria-checked="false" style="border: 0; background: #FFFFFF; padding: 0 12px; min-height: 38px">Choose purchases</button>
+<button role="radio" aria-checked="false" style="border: 0; background: #FFFFFF; padding: 0 12px; min-height: 38px">Just reduce balance</button>
+</div>
+</div>
+<table style="width: 100%; border-collapse: collapse">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 6px 8px; font-weight: 500">Purchase</th><th style="padding: 6px 8px; font-weight: 500">Supplier invoice</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Amount</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Still open</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">This payment</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Left open</th></tr></thead>
+<tbody style="font-family: 'IBM Plex Mono', monospace">
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">P-0341</td><td style="padding: 8px">OUP-76102 · 18 Aug</td><td style="padding: 8px; text-align: right">148,300</td><td style="padding: 8px; text-align: right">112,600</td><td style="padding: 8px; text-align: right; color: #084F4B; font-weight: 600">112,600</td><td style="padding: 8px; text-align: right"><span style="font-family: 'IBM Plex Sans', sans-serif; background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600">Paid</span></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">P-0388</td><td style="padding: 8px">OUP-77421 · 2 Oct</td><td style="padding: 8px; text-align: right">170,440</td><td style="padding: 8px; text-align: right">170,440</td><td style="padding: 8px; text-align: right; color: #084F4B; font-weight: 600">37,400</td><td style="padding: 8px; text-align: right">133,040</td></tr>
+</tbody>
+</table>
+</section>
+</div>
+
+<aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section aria-label="Balance" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">What we owe Oxford University Press</h2>
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span>Previous balance</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">283,040</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; color: #084F4B"><span>Paid now</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">− 150,000</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><label for="mp-disc" style="color: #5B6168">Discount from supplier</label><input id="mp-disc" value="0" style="width: 90px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; background: #E3F1EF; border-radius: 8px; padding: 10px 12px"><span style="font-weight: 600">New balance</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600">133,040</span></div>
+<span style="font-size: 13px; color: #5B6168">Terms 60 days · P-0341 was 53 days old</span>
+</section>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 52px; font-size: 16px; font-weight: 600">Save and print voucher</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 46px">Save</button>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

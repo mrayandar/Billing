@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Customer requests</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid #0B6B66">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">U</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">Customer requests <span style="font-size: 15px; font-weight: 400; color: #5B6168">books asked for but not in stock</span></h1>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Make purchase order from waiting requests</button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<section aria-label="New request" style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 2px solid #0B6B66; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">New request</h2>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="rq-book" style="font-size: 12px; color: #5B6168">Book (code, name, or type a new title)</label><input id="rq-book" value="Oxford Science 8" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="rq-qty" style="font-size: 12px; color: #5B6168">Quantity</label><input id="rq-qty" value="2" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="rq-adv" style="font-size: 12px; color: #5B6168">Advance paid</label><input id="rq-adv" value="1,000" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="rq-name" style="font-size: 12px; color: #5B6168">Customer name</label><input id="rq-name" value="Walk-in · Ahmed" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="rq-phone" style="font-size: 12px; color: #5B6168">WhatsApp number</label><input id="rq-phone" placeholder="03XX-XXXXXXX" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 48px; font-weight: 600">Save request and print advance slip</button>
+</section>
+
+<section aria-label="Requests" style="flex: 999 1 760px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 6px; flex-wrap: wrap">
+<button aria-pressed="true" style="border: 0; background: #E3F1EF; color: #084F4B; border-radius: 16px; min-height: 34px; padding: 0 12px; font-weight: 600">Waiting (7)</button>
+<button style="border: 1px solid #DEDBD3; background: #FFFFFF; border-radius: 16px; min-height: 34px; padding: 0 12px">Ordered (3)</button>
+<button style="border: 1px solid #DEDBD3; background: #FFFFFF; border-radius: 16px; min-height: 34px; padding: 0 12px">Arrived, not collected (2)</button>
+<button style="border: 1px solid #DEDBD3; background: #FFFFFF; border-radius: 16px; min-height: 34px; padding: 0 12px">Done</button>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 700px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 6px 8px; font-weight: 500">Date</th><th style="padding: 6px 8px; font-weight: 500">Book</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Qty</th><th style="padding: 6px 8px; font-weight: 500">Customer</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Advance</th><th style="padding: 6px 8px; font-weight: 500">Supplier</th></tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">8 Oct</td><td style="padding: 8px">Oxford Science 8</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">2</td><td style="padding: 8px">Sana · 0321-…</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,000</td><td style="padding: 8px; color: #5B6168">Oxford UP</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">7 Oct</td><td style="padding: 8px">Oxford Science 8</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1</td><td style="padding: 8px">Walk-in · 0300-…</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">0</td><td style="padding: 8px; color: #5B6168">Oxford UP</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">6 Oct</td><td style="padding: 8px">Paramount English 3</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">25</td><td style="padding: 8px">City School Book Depot</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">0</td><td style="padding: 8px; color: #5B6168">Paramount</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">4 Oct</td><td style="padding: 8px">[New title, not in catalogue] <span style="font-size: 12px; color: #7A4E00">· new</span></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1</td><td style="padding: 8px">Walk-in · 0333-…</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">500</td><td style="padding: 8px; color: #5B6168">Not set</td></tr>
+</tbody>
+</table>
+</div>
+<span style="font-size: 13px; color: #5B6168">When a requested book arrives in a purchase, waiting customers get a WhatsApp message and the advance is used on their bill.</span>
+</section>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

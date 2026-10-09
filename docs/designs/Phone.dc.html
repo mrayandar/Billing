@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Billing screen, phone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3; padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div style="display: flex; align-items: baseline; gap: 8px">
+<span style="font-weight: 700; font-size: 16px">Bill</span>
+<span style="font-family: 'IBM Plex Mono', monospace; color: #5B6168">M1-0318</span>
+</div>
+<div role="group" aria-label="Bill type" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden; font-size: 13px">
+<button style="border: 0; background: #FFFFFF; padding: 0 12px; min-height: 36px">Retail</button>
+<button aria-pressed="true" style="border: 0; background: {{accent}}; color: #FFFFFF; padding: 0 12px; min-height: 36px; font-weight: 600">Wholesale</button>
+</div>
+</div>
+<button style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #DEDBD3; background: #FAF9F6; border-radius: 8px; padding: 8px 12px; min-height: 44px; text-align: left">
+<span><span style="font-weight: 600">Ali Traders</span> <span style="color: #5B6168; font-size: 13px">· due Rs. 24,300</span></span>
+<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M5 3l4 4-4 4" stroke="#5B6168" stroke-width="1.6" fill="none"/></svg>
+</button>
+</header>
+
+<section aria-label="Add item" style="padding: 12px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 8px">
+<div style="flex: 1; display: flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid #C9C5BB; border-radius: 8px; padding: 0 10px">
+<label for="m-code" style="font-size: 12px; color: #5B6168">Code</label>
+<input id="m-code" value="3307" inputmode="numeric" style="border: 0; outline: 0; flex: 1; min-width: 0; padding: 11px 0; font-family: 'IBM Plex Mono', monospace; font-size: 17px">
+</div>
+<button aria-label="Scan barcode with camera" style="width: 48px; height: 48px; border: 0; border-radius: 8px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 7V3h4M16 3h4v4M20 15v4h-4M6 19H2v-4M6 7v8M9 7v8M12 7v8M15 7v8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+<button aria-label="Search items" style="width: 48px; height: 48px; border: 1px solid #C9C5BB; border-radius: 8px; background: #FFFFFF; color: #1B1F24; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M13.5 13.5l4 4" stroke="currentColor" stroke-width="1.6"/></svg></button>
+</div>
+
+<div style="background: #FFFFFF; border: 2px solid {{accent}}; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; gap: 8px">
+<div style="min-width: 0">
+<div style="font-weight: 600; font-size: 15px">Oxford Social Studies 4</div>
+<div style="font-size: 12px; color: #5B6168">Oxford · stock 46 · last sold Rs. 702 on 28 Sep</div>
+</div>
+</div>
+<div role="group" aria-label="Price batch" style="display: flex; gap: 6px; align-items: center">
+<span style="font-size: 12px; color: #5B6168; margin-right: 2px">Batch</span>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; padding: 0 10px; min-height: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 13px">720 ×6</button>
+<button aria-pressed="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; padding: 0 10px; min-height: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">780 ×40</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<label for="m-price" style="font-size: 12px; color: #5B6168">Price</label>
+<input id="m-price" value="780" inputmode="decimal" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right; width: 100%; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<label for="m-qty" style="font-size: 12px; color: {{accent}}; font-weight: 600">Qty</label>
+<input id="m-qty" value="12" inputmode="numeric" style="border: 2px solid {{accent}}; outline: 3px solid #BFE0DC; border-radius: 6px; padding: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right; width: 100%; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<label for="m-disc" style="font-size: 12px; color: #5B6168">Disc % <span style="color: #3E5552">company</span></label>
+<input id="m-disc" value="10" inputmode="decimal" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right; width: 100%; box-sizing: border-box">
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px">
+<label style="display: inline-flex; align-items: center; gap: 6px; min-height: 28px"><input type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: {{accent}}"> Save price and discount for Ali Traders</label>
+</div>
+<button style="border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 48px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; padding: 0 16px">
+<span>Add to bill</span>
+<span style="font-family: 'IBM Plex Mono', monospace">8,424</span>
+</button>
+</div>
+</section>
+
+<section aria-label="Bill lines" style="flex: 1; min-height: 0; padding: 0 16px; display: flex; flex-direction: column; gap: 8px; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 14px; font-weight: 600">5 lines · 75 units</h2>
+<span style="font-size: 12px; color: #5B6168">Tap a line to edit</span>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; gap: 10px">
+<div style="min-width: 0">
+<div style="font-weight: 500">Oxford Primary English 5</div>
+<div style="font-size: 12px; color: #5B6168; font-family: 'IBM Plex Mono', monospace">20 × 850 · 12% <span style="font-family: 'IBM Plex Sans', sans-serif; color: #084F4B; font-weight: 600">book</span></div>
+</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">14,960</div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; gap: 10px">
+<div style="min-width: 0">
+<div style="font-weight: 500">Oxford Science 7</div>
+<div style="font-size: 12px; color: #5B6168; font-family: 'IBM Plex Mono', monospace">15 × 1,200 · 10% <span style="font-family: 'IBM Plex Sans', sans-serif">company</span></div>
+</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">16,200</div>
+</div>
+
+<div style="background: #FFF8EA; border: 2px solid #C98A1A; border-radius: 8px; padding: 9px 11px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 10px">
+<div style="font-weight: 500">Paramount Mathematics 6</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">14,400</div>
+</div>
+<div style="display: flex; gap: 8px">
+<button style="flex: 1; border: 1px solid #C98A1A; background: #FFFFFF; border-radius: 6px; min-height: 40px; font-size: 13px">Change qty or price</button>
+<button style="flex: 1; border: 1px solid #A33A2A; background: #FFFFFF; color: #8E2F21; border-radius: 6px; min-height: 40px; font-size: 13px">Remove line</button>
+</div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; gap: 10px">
+<div style="min-width: 0">
+<div style="font-weight: 500">Dollar Gel Pen Blue <span style="color: #5B6168; font-weight: 400">(box)</span></div>
+<div style="font-size: 12px; color: #5B6168; font-family: 'IBM Plex Mono', monospace">10 × 360 · 5% <span style="font-family: 'IBM Plex Sans', sans-serif">company</span></div>
+</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">3,420</div>
+</div>
+</section>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #DEDBD3; padding: 12px 16px 20px; display: flex; align-items: center; gap: 12px">
+<div style="flex: 1; display: flex; flex-direction: column">
+<span style="font-size: 12px; color: #5B6168">This bill · after discount Rs. 6,870</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">Rs. 60,730</span>
+</div>
+<button aria-label="Hold bill" style="width: 48px; height: 52px; border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M6 3v12M12 3v12" stroke="#1B1F24" stroke-width="2"/></svg></button>
+<button style="border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 52px; padding: 0 22px; font-size: 16px; font-weight: 600">Pay</button>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

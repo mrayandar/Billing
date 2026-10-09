@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stock</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid #0B6B66">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">Stock</h1>
+<div role="tablist" aria-label="Stock views" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 16px; min-height: 42px">Stock list</button>
+<button role="tab" aria-selected="true" style="border: 0; background: #0B6B66; color: #FFFFFF; padding: 0 16px; min-height: 42px; font-weight: 600">Stock count</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 16px; min-height: 42px">Adjustments</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 16px; min-height: 42px">Damaged</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 16px; min-height: 42px">Transfers</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">Stock value at cost</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">8,412,600</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">At sale price</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">11,980,300</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">Reserved for orders</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">640 units</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B6168">Damaged, not sellable</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600">38 units</div></div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<section aria-label="Stock count" style="flex: 999 1 760px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Count: Oxford textbooks, shelf A</h2>
+<span style="color: #5B6168; font-size: 13px">Started 9:10 by Bilal · 214 of 1,284 items counted</span>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px; width: 200px"><label for="sc-scan" style="font-size: 12px; color: #5B6168">Scan or type code</label><input id="sc-scan" value="1103" style="border: 2px solid #0B6B66; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 110px"><label for="sc-qty" style="font-size: 12px; color: #5B6168">Counted</label><input id="sc-qty" value="6" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right"></div>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 6px; min-height: 44px; padding: 0 16px; font-weight: 600">Add ⏎</button>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 640px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 6px 8px; font-weight: 500">Code</th><th style="padding: 6px 8px; font-weight: 500">Item</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">System</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Counted</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Difference</th><th style="padding: 6px 8px; font-weight: 500">Note</th></tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2; background: #FFF8EA"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1103</td><td style="padding: 8px">Oxford Science 8</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">4</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">6</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #0B6B66; font-weight: 600">+2</td><td style="padding: 8px; color: #5B6168">Found behind shelf</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1102</td><td style="padding: 8px">Oxford Science 7</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">36</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">36</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #5B6168">0</td><td style="padding: 8px"></td></tr>
+<tr style="border-top: 1px solid #ECE9E2; background: #FDF1EF"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1045</td><td style="padding: 8px">Oxford Primary English 5</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">118</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">115</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #8E2F21; font-weight: 600">−3</td><td style="padding: 8px; color: #5B6168"></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">3307</td><td style="padding: 8px">Oxford Social Studies 4</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">46</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">46</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #5B6168">0</td><td style="padding: 8px"></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section aria-label="Count summary" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Differences so far</h2>
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Items with extra stock</span><span style="font-family: 'IBM Plex Mono', monospace">3 · +5 units</span></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Items short</span><span style="font-family: 'IBM Plex Mono', monospace">7 · −14 units</span></div>
+<div style="display: flex; justify-content: space-between; font-weight: 600; border-top: 1px solid #ECE9E2; padding-top: 8px"><span>Value of difference</span><span style="font-family: 'IBM Plex Mono', monospace">− 7,940</span></div>
+<span style="font-size: 13px; color: #5B6168">Stock changes only after a manager approves the count. Each change is logged as an adjustment.</span>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px">Pause count</button>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 48px; font-weight: 600">Finish and send for approval</button>
+</section>
+<section aria-label="Quick adjustment" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Quick adjustment</h2>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="adj-item" style="font-size: 12px; color: #5B6168">Item</label><input id="adj-item" placeholder="Code or name" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div role="radiogroup" aria-label="Reason" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+<button role="radio" aria-checked="true" style="border: 2px solid #0B6B66; background: #E3F1EF; border-radius: 6px; min-height: 40px; font-weight: 600">Damaged</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Lost</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Found</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Correction</button>
+</div>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px">Save adjustment</button>
+</section>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

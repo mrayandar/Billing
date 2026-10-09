@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Close shift</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 12px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+<span style="font-weight: 700; font-size: 17px">Nabeel Dar Book Depot</span>
+<span style="color: #5B6168">Counter 1 · Usman · shift opened 9:02</span>
+<a href="Main.dc.html" style="margin-left: auto">← Back to billing</a>
+</div>
+</header>
+
+<main style="max-width: 1100px; margin: 0 auto; padding: 24px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">Close shift</h1>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<section aria-label="Count cash" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">1. Count the cash in the drawer</h2>
+<table style="width: 100%; border-collapse: collapse">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 6px 8px; font-weight: 500">Note / coin</th><th style="padding: 6px 8px; font-weight: 500; text-align: right; width: 100px">How many</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Amount</th></tr></thead>
+<tbody style="font-family: 'IBM Plex Mono', monospace">
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">5,000</td><td style="padding: 4px 8px; text-align: right"><label for="n5000" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">5,000 notes</label><input id="n5000" value="4" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">20,000</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">1,000</td><td style="padding: 4px 8px; text-align: right"><label for="n1000" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">1,000 notes</label><input id="n1000" value="9" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">9,000</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">500</td><td style="padding: 4px 8px; text-align: right"><label for="n500" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">500 notes</label><input id="n500" value="6" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">3,000</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">100</td><td style="padding: 4px 8px; text-align: right"><label for="n100" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">100 notes</label><input id="n100" value="18" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">1,800</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">50</td><td style="padding: 4px 8px; text-align: right"><label for="n50" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">50 notes</label><input id="n50" value="6" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">300</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">20</td><td style="padding: 4px 8px; text-align: right"><label for="n20" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">20 notes</label><input id="n20" value="3" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">60</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 6px 8px">10 and coins</td><td style="padding: 4px 8px; text-align: right"><label for="n10" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">10 notes and coins</label><input id="n10" value="2" style="width: 64px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 6px 8px; text-align: right"></td><td style="padding: 6px 8px; text-align: right">20</td></tr>
+</tbody>
+<tfoot><tr style="border-top: 2px solid #DEDBD3; font-weight: 600"><td style="padding: 8px" colspan="2">Counted cash</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 18px">34,180</td></tr></tfoot>
+</table>
+</section>
+
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section aria-label="Expected cash" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">2. What the system expects</h2>
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Opening cash</span><span style="font-family: 'IBM Plex Mono', monospace">5,000</span></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Cash sales (24 bills)</span><span style="font-family: 'IBM Plex Mono', monospace">31,050</span></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Cash refunds</span><span style="font-family: 'IBM Plex Mono', monospace">− 1,150</span></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #5B6168">Expenses paid from drawer</span><span style="font-family: 'IBM Plex Mono', monospace">− 700</span></div>
+<div style="display: flex; justify-content: space-between; font-weight: 600; border-top: 1px solid #ECE9E2; padding-top: 8px"><span>Expected cash</span><span style="font-family: 'IBM Plex Mono', monospace">34,200</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; background: #FBEFD9; color: #7A4E00; border-radius: 6px; padding: 8px 10px; font-weight: 600"><span>Short by</span><span style="font-family: 'IBM Plex Mono', monospace">20</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="diff-note" style="font-size: 12px; color: #5B6168">Reason for difference</label><input id="diff-note" placeholder="Optional" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<span style="font-size: 13px; color: #5B6168">Not in the drawer: bank 41,000 · card 12,270 · wallet 10,000</span>
+</section>
+
+<section aria-label="Handover" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">3. Hand over</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="handover" style="font-size: 12px; color: #5B6168">Given to owner</label><input id="handover" value="30,000" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #5B6168">Left in drawer for tomorrow</span><span style="padding: 9px 0; font-family: 'IBM Plex Mono', monospace; text-align: right; font-weight: 600">4,180</span></div>
+</div>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 52px; font-size: 16px; font-weight: 600">Close shift and print summary</button>
+<span style="font-size: 13px; color: #5B6168">The owner gets the summary on WhatsApp.</span>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings and users</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid #0B6B66">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<nav aria-label="Settings" style="flex: 1 1 240px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 2px">
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Shop profile</a>
+<a href="#" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 9px 10px; border-radius: 6px; background: #E3F1EF">Users and roles</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Receipts and invoices</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Barcode labels</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Billing screen</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Business rules</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Tax</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Lists: units, payment modes, reasons</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">WhatsApp and SMS messages</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Counters and devices</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Backup and restore</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 9px 10px; border-radius: 6px">Import and export</a>
+</nav>
+
+<div style="flex: 999 1 820px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="Users" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">Users</h2>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 40px; padding: 0 14px; font-weight: 600">+ Add user</button>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 700px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px"><th style="padding: 6px 8px; font-weight: 500">Name</th><th style="padding: 6px 8px; font-weight: 500">Role</th><th style="padding: 6px 8px; font-weight: 500; text-align: right">Max discount</th><th style="padding: 6px 8px; font-weight: 500">Outside the shop</th><th style="padding: 6px 8px; font-weight: 500">Last login</th><th style="padding: 6px 8px; font-weight: 500">Status</th></tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-weight: 500">Nabeel Dar</td><td style="padding: 9px 8px">Owner</td><td style="padding: 9px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">Any</td><td style="padding: 9px 8px">Allowed · 2-step</td><td style="padding: 9px 8px; color: #5B6168">Today 13:40, phone</td><td style="padding: 9px 8px"><span style="background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600">Active</span></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-weight: 500">[Manager name]</td><td style="padding: 9px 8px">Manager</td><td style="padding: 9px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">20%</td><td style="padding: 9px 8px">Allowed · 2-step</td><td style="padding: 9px 8px; color: #5B6168">Yesterday 19:05</td><td style="padding: 9px 8px"><span style="background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600">Active</span></td></tr>
+<tr style="border-top: 1px solid #ECE9E2; background: #F3FAF9"><td style="padding: 9px 8px; font-weight: 500">Usman</td><td style="padding: 9px 8px">Cashier</td><td style="padding: 9px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">5%</td><td style="padding: 9px 8px">Not allowed</td><td style="padding: 9px 8px; color: #5B6168">Today 9:02, Counter 1</td><td style="padding: 9px 8px"><span style="background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600">Active</span></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-weight: 500">Bilal</td><td style="padding: 9px 8px">Cashier</td><td style="padding: 9px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">5%</td><td style="padding: 9px 8px">Not allowed</td><td style="padding: 9px 8px; color: #5B6168">Today 10:15, Counter 2</td><td style="padding: 9px 8px"><span style="background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600">Active</span></td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-weight: 500">[Accountant name]</td><td style="padding: 9px 8px">Accountant</td><td style="padding: 9px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">0%</td><td style="padding: 9px 8px">Allowed</td><td style="padding: 9px 8px; color: #5B6168">3 Oct</td><td style="padding: 9px 8px"><span style="background: #EEECE6; color: #3D4248; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600">Paused</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section aria-label="Role permissions" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">What a Cashier can do</h2>
+<div role="tablist" aria-label="Role" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden">
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 12px; min-height: 38px">Manager</button>
+<button role="tab" aria-selected="true" style="border: 0; background: #0B6B66; color: #FFFFFF; padding: 0 12px; min-height: 38px; font-weight: 600">Cashier</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 12px; min-height: 38px">Accountant</button>
+<button role="tab" aria-selected="false" style="border: 0; background: #FFFFFF; padding: 0 12px; min-height: 38px">+ New role</button>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168">BILLING</span>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Make retail and wholesale bills</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Change price on a bill</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Save price and discount for a client</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> Edit a saved bill</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> Cancel a bill</label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168">STOCK AND ITEMS</span>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Print barcode labels</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Count stock</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> Change base prices</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> See cost and profit</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> Adjust stock</label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168">MONEY AND RETURNS</span>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Receive payments</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" checked style="width: 17px; height: 17px; accent-color: #0B6B66"> Returns within 7 days</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> Returns without a bill</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> Record expenses</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 30px"><input type="checkbox" style="width: 17px; height: 17px; accent-color: #0B6B66"> See reports</label>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; border-top: 1px solid #ECE9E2; padding-top: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px; width: 160px"><label for="max-disc" style="font-size: 12px; color: #5B6168">Max discount without approval</label><input id="max-disc" value="5%" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+<span style="color: #5B6168; font-size: 13px; padding-bottom: 10px">Anything above this asks for a manager's password on the spot.</span>
+<button style="margin-left: auto; border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 18px; font-weight: 600">Save role</button>
+</div>
+</section>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

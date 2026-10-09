@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Noto+Nastaliq+Urdu:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.4; display: flex; align-items: center; justify-content: center; padding: 32px 16px; box-sizing: border-box">
+<main style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 20px">
+<div style="text-align: center; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 26px; font-weight: 700">Nabeel Dar Book Depot</span>
+<span lang="ur" dir="rtl" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 18px; line-height: 2">نبیل ڈار بک ڈپو</span>
+</div>
+<section aria-label="Sign in" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h1 style="margin: 0; font-size: 18px; font-weight: 600">Sign in</h1>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="lg-user" style="font-size: 13px; color: #5B6168">Username</label><input id="lg-user" value="usman" autocomplete="username" style="border: 1px solid #C9C5BB; border-radius: 8px; padding: 11px 12px; font-size: 16px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="lg-pass" style="font-size: 13px; color: #5B6168">Password</label><input id="lg-pass" type="password" value="password" autocomplete="current-password" style="border: 2px solid #0B6B66; border-radius: 8px; padding: 10px 11px; font-size: 16px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="lg-counter" style="font-size: 13px; color: #5B6168">Counter</label><input id="lg-counter" value="Counter 1" style="border: 1px solid #C9C5BB; border-radius: 8px; padding: 11px 12px; font-size: 16px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="lg-open" style="font-size: 13px; color: #5B6168">Opening cash in drawer</label><input id="lg-open" value="5,000" style="border: 1px solid #C9C5BB; border-radius: 8px; padding: 11px 12px; font-size: 16px; font-family: 'IBM Plex Mono', monospace; text-align: right"></div>
+<button style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 52px; font-size: 16px; font-weight: 600">Sign in and open shift</button>
+<a href="#" style="text-align: center; font-size: 14px">Forgot password? Ask the owner to reset it</a>
+</section>
+<p style="margin: 0; text-align: center; font-size: 13px; color: #5B6168">Signing in from outside the shop needs a code sent to your phone.</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":820}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

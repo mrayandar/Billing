@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Client ledger</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<nav aria-label="Ledgers section" style="display: flex; align-self: flex-start; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+<a href="Ledger.dc.html" aria-current="page" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600">Client ledgers</a>
+<a href="Suppliers.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Supplier ledgers</a>
+<a href="Expenses.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Expenses</a>
+<a href="ShiftClose.dc.html" style="display: inline-flex; align-items: center; padding: 0 16px; min-height: 42px; color: #1B1F24; text-decoration: none">Cash and shifts</a>
+</nav>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="lclient" style="font-size: 12px; color: #5B6168">Client</label>
+<input id="lclient" value="Ali Traders" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; width: 240px; font-weight: 600; font-size: 16px; background: #FFFFFF">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="lperiod" style="font-size: 12px; color: #5B6168">Period</label>
+<input id="lperiod" value="1 Aug – 9 Oct 2026" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; width: 200px; background: #FFFFFF">
+</div>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Send reminder</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Print statement</button>
+<a href="ReceivePayment.dc.html" style="display: inline-flex; align-items: center; border: 0; background: {{accent}}; color: #FFFFFF; text-decoration: none; border-radius: 8px; min-height: 44px; padding: 0 18px; font-weight: 600">Receive payment</a>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px">
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Balance due</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600">45,030</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Credit limit</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">150,000</span><span style="font-size: 13px; color: #5B6168">30% used</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">0–30 days</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">45,030</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">31–60 days</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">0</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Over 60 days</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">0</span></div>
+</div>
+
+<section aria-label="Ledger entries" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px">
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 760px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500">Date</th>
+<th style="padding: 6px 8px; font-weight: 500">Document</th>
+<th style="padding: 6px 8px; font-weight: 500">Details</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Debit</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Credit</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Balance</th>
+</tr></thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2; background: #FAF9F6"><td style="padding: 8px">1 Aug</td><td style="padding: 8px; color: #5B6168">—</td><td style="padding: 8px; color: #5B6168">Opening balance</td><td style="padding: 8px"></td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">31,200</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">12 Aug</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">C1-0861</a></td><td style="padding: 8px">Invoice · 7 items</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">58,400</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">89,600</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">20 Aug</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">RC-0233</a></td><td style="padding: 8px">Payment · bank transfer</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">50,000</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">39,600</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">5 Sep</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">R-0112</a></td><td style="padding: 8px">Return · 4 copies</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">3,240</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">36,360</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">28 Sep</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">C1-0987</a></td><td style="padding: 8px">Invoice · 5 items</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">42,940</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">79,300</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">2 Oct</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">RC-0251</a></td><td style="padding: 8px">Payment · cash</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">55,000</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">24,300</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">9 Oct</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">C1-1042</a></td><td style="padding: 8px">Invoice · 5 items, incl. delivery 500</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">60,730</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">85,030</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 8px">9 Oct</td><td style="padding: 8px"><a href="#" style="font-family: 'IBM Plex Mono', monospace">RC-0264</a></td><td style="padding: 8px">Payment · bank transfer, with bill</td><td style="padding: 8px"></td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">40,000</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-weight: 600">45,030</td></tr>
+</tbody>
+<tfoot><tr style="border-top: 2px solid #DEDBD3; font-weight: 600"><td style="padding: 8px" colspan="3">Period totals</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">162,070</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">148,240</td><td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">45,030</td></tr></tfoot>
+</table>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

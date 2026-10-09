@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New client</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input,textarea{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div>
+<a href="ClientDiscounts.dc.html" style="font-size: 13px">← Clients</a>
+<h1 style="margin: 4px 0 0; font-size: 22px; font-weight: 600">New client</h1>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<a href="ClientDiscounts.dc.html" style="display: inline-flex; align-items: center; border: 1px solid #C9C5BB; background: #FFFFFF; color: #1B1F24; text-decoration: none; border-radius: 8px; min-height: 44px; padding: 0 14px">Cancel</a>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Save and set discounts</button>
+<button style="border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 18px; font-weight: 600">Save client</button>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-labelledby="h-basic" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="h-basic" style="margin: 0; font-size: 15px; font-weight: 600">Basic details</h2>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Client type</span>
+<div role="radiogroup" aria-label="Client type" style="display: flex; flex-wrap: wrap; gap: 6px">
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px; padding: 0 14px">Retail customer</button>
+<button role="radio" aria-checked="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 40px; padding: 0 14px; font-weight: 600">Wholesale / shop</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px; padding: 0 14px">School / institution</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px; padding: 0 14px">Sub-dealer</button>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-name" style="font-size: 12px; color: #5B6168">Client / business name *</label><input id="c-name" value="Madina Book Centre" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-person" style="font-size: 12px; color: #5B6168">Contact person</label><input id="c-person" placeholder="Owner or buyer's name" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-mobile" style="font-size: 12px; color: #5B6168">Mobile *</label><input id="c-mobile" placeholder="03XX-XXXXXXX" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-wa" style="font-size: 12px; color: #5B6168">WhatsApp</label><input id="c-wa" placeholder="Same as mobile" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-phone2" style="font-size: 12px; color: #5B6168">Other phone</label><input id="c-phone2" placeholder="Landline or second number" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-email" style="font-size: 12px; color: #5B6168">Email</label><input id="c-email" placeholder="Optional" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+</div>
+</section>
+
+<section aria-labelledby="h-addr" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="h-addr" style="margin: 0; font-size: 15px; font-weight: 600">Address and delivery</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px; grid-column: 1 / span 3"><label for="c-addr" style="font-size: 12px; color: #5B6168">Shop address</label><input id="c-addr" placeholder="Shop number, street, market" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-area" style="font-size: 12px; color: #5B6168">Area / market</label><input id="c-area" placeholder="e.g. Urdu Bazaar" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-city" style="font-size: 12px; color: #5B6168">City</label><input id="c-city" placeholder="City" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-map" style="font-size: 12px; color: #5B6168">Location link</label><input id="c-map" placeholder="Map pin, optional" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; grid-column: 1 / span 3"><label for="c-deliv" style="font-size: 12px; color: #5B6168">Delivery address, if different</label><input id="c-deliv" placeholder="Godown or school address" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+</div>
+</section>
+
+<section aria-labelledby="h-biz" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="h-biz" style="margin: 0; font-size: 15px; font-weight: 600">Business details</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-cnic" style="font-size: 12px; color: #5B6168">CNIC</label><input id="c-cnic" placeholder="XXXXX-XXXXXXX-X" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-ntn" style="font-size: 12px; color: #5B6168">NTN / tax number</label><input id="c-ntn" placeholder="Optional" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-sales" style="font-size: 12px; color: #5B6168">Salesman / handled by</label><input id="c-sales" placeholder="Staff name" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-ref" style="font-size: 12px; color: #5B6168">Referred by</label><input id="c-ref" placeholder="Optional" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-school" style="font-size: 12px; color: #5B6168">Linked school(s)</label><input id="c-school" placeholder="For book sets" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-code" style="font-size: 12px; color: #5B6168">Client code</label><input id="c-code" value="CL-0412" style="border: 1px solid #E5E2DA; background: #FAF9F6; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-notes" style="font-size: 12px; color: #5B6168">Notes</label><textarea id="c-notes" rows="2" placeholder="Anything staff should know, e.g. orders only on Mondays" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; resize: vertical"></textarea></div>
+</section>
+</div>
+
+<aside style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-labelledby="h-acct" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="h-acct" style="margin: 0; font-size: 15px; font-weight: 600">Account and credit</h2>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="c-open" style="font-size: 12px; color: #5B6168">Opening balance</label>
+<div style="display: flex; gap: 6px">
+<input id="c-open" value="0" style="flex: 1; min-width: 0; border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; text-align: right; font-family: 'IBM Plex Mono', monospace">
+<div role="radiogroup" aria-label="Opening balance type" style="display: flex; gap: 4px">
+<button role="radio" aria-checked="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 40px; padding: 0 10px; font-size: 13px; font-weight: 600">They owe us</button>
+<button role="radio" aria-checked="false" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px; padding: 0 10px; font-size: 13px">We owe them</button>
+</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-limit" style="font-size: 12px; color: #5B6168">Credit limit (Rs.)</label><input id="c-limit" value="100,000" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; text-align: right; font-family: 'IBM Plex Mono', monospace"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="c-terms" style="font-size: 12px; color: #5B6168">Payment terms (days)</label><input id="c-terms" value="30" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; text-align: right; font-family: 'IBM Plex Mono', monospace"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Over the credit limit</span>
+<div role="radiogroup" aria-label="Over the credit limit" style="display: flex; gap: 6px">
+<button role="radio" aria-checked="true" style="flex: 1; border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 40px; font-weight: 600">Warn</button>
+<button role="radio" aria-checked="false" style="flex: 1; border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">Block, needs approval</button>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="h-disc" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 id="h-disc" style="margin: 0; font-size: 15px; font-weight: 600">Discounts</h2>
+<div role="radiogroup" aria-label="Starting discounts" style="display: flex; flex-direction: column; gap: 6px">
+<button role="radio" aria-checked="false" style="text-align: left; border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px; padding: 0 12px">Start with no discounts</button>
+<button role="radio" aria-checked="true" style="text-align: left; border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 44px; padding: 0 12px; font-weight: 600">Copy from client: Ali Traders <span style="font-weight: 400; color: #3E5552">· 5 companies, 4 book rules</span></button>
+</div>
+<span style="font-size: 13px; color: #5B6168">You can change any of them after saving.</span>
+</section>
+
+<section aria-labelledby="h-msg" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 id="h-msg" style="margin: 0; font-size: 15px; font-weight: 600">Messages</h2>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 32px"><input type="checkbox" checked style="width: 18px; height: 18px; accent-color: {{accent}}"> Send invoices on WhatsApp</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 32px"><input type="checkbox" checked style="width: 18px; height: 18px; accent-color: {{accent}}"> Send payment reminders</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 32px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: {{accent}}"> Tell them when requested books arrive</label>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #5B6168">Message language</span>
+<div role="radiogroup" aria-label="Message language" style="display: flex; gap: 6px">
+<button role="radio" aria-checked="false" style="flex: 1; border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 40px">English</button>
+<button role="radio" aria-checked="true" style="flex: 1; border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 40px; font-weight: 600">Urdu</button>
+</div>
+</div>
+</section>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":1080}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

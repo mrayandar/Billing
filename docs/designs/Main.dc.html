@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Billing screen, computer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4; display: flex; flex-direction: column">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+</div>
+</header>
+<header style="background: #FAF9F6; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+<span style="font-weight: 600; font-size: 16px">New bill</span>
+<div role="group" aria-label="Bill type" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden">
+<button style="border: 0; background: #FFFFFF; color: #1B1F24; padding: 8px 16px; min-height: 40px">Retail</button>
+<button aria-pressed="true" style="border: 0; background: {{accent}}; color: #FFFFFF; padding: 8px 16px; min-height: 40px; font-weight: 600">Wholesale</button>
+</div>
+<div style="display: flex; gap: 20px; flex-wrap: wrap; color: #5B6168">
+<span>Bill <strong style="color: #1B1F24; font-family: 'IBM Plex Mono', monospace">C1-1042</strong></span>
+<span>Fri 9 Oct 2026</span>
+</div>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 12px; color: #5B6168">
+<span>Counter 1 · Shift open 9:02</span>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; color: #1B1F24; font-weight: 600; font-size: 13px">U</span>
+</div>
+</div>
+</header>
+
+<main style="flex: 1; width: 100%; max-width: 1440px; margin: 0 auto; padding: 20px 20px 16px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+<div style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="Client" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<label for="client" style="font-size: 12px; color: #5B6168">Client (F6)</label>
+<input id="client" value="Ali Traders" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px; width: 220px; font-weight: 600">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #5B6168">Previous balance</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">Rs. 24,300</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #5B6168">Credit limit</span>
+<span style="font-family: 'IBM Plex Mono', monospace">Rs. 150,000</span>
+</div>
+</section>
+
+<section aria-label="Add item" style="background: #FFFFFF; border: 2px solid {{accent}}; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Add item</h2>
+<span style="color: #5B6168; font-size: 13px">Type code → Enter → price → Enter → qty → Enter → discount → Enter adds the line</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px; width: 96px">
+<label for="code" style="font-size: 12px; color: #5B6168">Code (F2)</label>
+<input id="code" value="3307" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 200px; min-width: 0">
+<span style="font-size: 12px; color: #5B6168">Item</span>
+<div style="border: 1px solid #E5E2DA; background: #FAF9F6; border-radius: 6px; padding: 9px 10px; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Oxford Social Studies 4 <span style="color: #5B6168">· Oxford · stock 46</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 104px">
+<label for="price" style="font-size: 12px; color: {{accent}}; font-weight: 600">Price</label>
+<input id="price" value="780" style="border: 2px solid {{accent}}; outline: 3px solid #BFE0DC; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 76px">
+<label for="qty" style="font-size: 12px; color: #5B6168">Qty</label>
+<input id="qty" value="1" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 84px">
+<label for="disc" style="font-size: 12px; color: #5B6168">Disc %</label>
+<input id="disc" value="10" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 90px">
+<span style="font-size: 12px; color: #5B6168">Line total</span>
+<div style="padding: 9px 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; text-align: right">702</div>
+</div>
+<button style="background: {{accent}}; color: #FFFFFF; border: 0; border-radius: 6px; padding: 0 18px; min-height: 44px; font-weight: 600">Add ⏎</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 13px; color: #5B6168">
+<label style="display: inline-flex; align-items: center; gap: 6px; color: #1B1F24; min-height: 28px"><input type="checkbox" checked style="width: 16px; height: 16px; margin: 0; accent-color: {{accent}}"> Save this price and discount for Ali Traders</label>
+<span>Discount from: <strong style="color: #1B1F24">Company rule, Oxford 10%</strong></span></div>
+</section>
+
+<section aria-label="Bill lines" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Bill · 5 lines, 75 units</h2>
+<span style="font-size: 13px; color: #5B6168">↑ ↓ select a line · Enter edit · Del remove</span>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px">
+<thead>
+<tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500; width: 28px">#</th>
+<th style="padding: 6px 8px; font-weight: 500; width: 60px">Code</th>
+<th style="padding: 6px 8px; font-weight: 500">Item</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Price</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Qty</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Disc</th>
+<th style="padding: 6px 8px; font-weight: 500">From</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Total</th>
+<th style="padding: 6px 8px; font-weight: 500; width: 92px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px; color: #5B6168">1</td>
+<td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1045</td>
+<td style="padding: 8px">Oxford Primary English 5</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">850</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">20</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">12%</td>
+<td style="padding: 8px"><span style="background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600">Book</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">14,960</td>
+<td style="padding: 4px 8px; text-align: right; white-space: nowrap">
+<button aria-label="Edit line 1" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+<button aria-label="Remove line 1" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.7 9.5h5.6l.7-9.5" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px; color: #5B6168">2</td>
+<td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1102</td>
+<td style="padding: 8px">Oxford Science 7</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,200</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">15</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">10%</td>
+<td style="padding: 8px"><span style="background: #EEECE6; color: #3D4248; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600">Company</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">16,200</td>
+<td style="padding: 4px 8px; text-align: right; white-space: nowrap">
+<button aria-label="Edit line 2" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+<button aria-label="Remove line 2" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.7 9.5h5.6l.7-9.5" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2; background: #FFF8EA; outline: 2px solid #C98A1A; outline-offset: -2px">
+<td style="padding: 6px 8px; color: #5B6168">3</td>
+<td style="padding: 6px 8px; font-family: 'IBM Plex Mono', monospace">2210</td>
+<td style="padding: 6px 8px">Paramount Mathematics 6 <span style="display: block; font-size: 12px; color: #7A4E00">Editing · Enter to save, Esc to cancel</span>
+<span style="display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: 12px; margin-top: 2px">
+<label style="display: inline-flex; align-items: center; gap: 5px; min-height: 24px"><input type="checkbox" checked style="width: 15px; height: 15px; margin: 0; accent-color: #C98A1A"> Save price and discount for client</label>
+</span></td>
+<td style="padding: 6px 8px; text-align: right"><label for="e-price" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Price, line 3</label><input id="e-price" value="640" style="width: 64px; border: 1px solid #C98A1A; border-radius: 4px; padding: 5px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace; background: #FFFFFF"></td>
+<td style="padding: 6px 8px; text-align: right"><label for="e-qty" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Quantity, line 3</label><input id="e-qty" value="25" style="width: 48px; border: 1px solid #C98A1A; border-radius: 4px; padding: 5px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace; background: #FFFFFF"></td>
+<td style="padding: 6px 8px; text-align: right"><label for="e-disc" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Discount, line 3</label><input id="e-disc" value="10" style="width: 44px; border: 2px solid #C98A1A; border-radius: 4px; padding: 4px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace; background: #FFFFFF"></td>
+<td style="padding: 6px 8px"><span style="background: #FBEFD9; color: #7A4E00; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600">Manual</span></td>
+<td style="padding: 6px 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">14,400</td>
+<td style="padding: 4px 8px; text-align: right; white-space: nowrap">
+<button aria-label="Save line 3" style="border: 0; background: #C98A1A; color: #FFFFFF; height: 32px; border-radius: 6px; padding: 0 10px; font-size: 13px; font-weight: 600">Save</button>
+</td>
+</tr><tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px; color: #5B6168">4</td>
+<td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">5031</td>
+<td style="padding: 8px">Dollar Gel Pen Blue <span style="color: #5B6168">(box of 12)</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">360</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">10 box</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">5%</td>
+<td style="padding: 8px"><span style="background: #EEECE6; color: #3D4248; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600">Company</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">3,420</td>
+<td style="padding: 4px 8px; text-align: right; white-space: nowrap">
+<button aria-label="Edit line 4" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+<button aria-label="Remove line 4" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.7 9.5h5.6l.7-9.5" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px; color: #5B6168">5</td>
+<td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">1150</td>
+<td style="padding: 8px">Oxford Atlas for Pakistan <span style="color: #5B6168">· batch 2,500</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">2,500</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">5</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">10%</td>
+<td style="padding: 8px"><span style="background: #EEECE6; color: #3D4248; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600">Company</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">11,250</td>
+<td style="padding: 4px 8px; text-align: right; white-space: nowrap">
+<button aria-label="Edit line 5" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-3 7-7 2 2-7 7-3 1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+<button aria-label="Remove line 5" style="border: 0; background: transparent; width: 36px; height: 36px; border-radius: 6px; color: #5B6168"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.7 9.5h5.6l.7-9.5" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="Item history" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">History</h2>
+<span style="font-size: 12px; color: #5B6168">Updates as soon as an item is picked</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Oxford Social Studies 4</span>
+<span style="font-size: 13px; color: #5B6168">sold to Ali Traders</span>
+</div>
+<div style="background: #E3F1EF; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #3E5552">Last sold · 28 Sep 2026 · bill W-0987</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #084F4B">30 × Rs. 702</span>
+<span style="font-size: 12px; color: #3E5552">780 less 10% (company)</span>
+</div>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px">
+<thead>
+<tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 5px 6px; font-weight: 500">Date</th>
+<th style="padding: 5px 6px; font-weight: 500; text-align: right">Qty</th>
+<th style="padding: 5px 6px; font-weight: 500; text-align: right">Price</th>
+<th style="padding: 5px 6px; font-weight: 500; text-align: right">Disc</th>
+<th style="padding: 5px 6px; font-weight: 500; text-align: right">Net</th>
+</tr>
+</thead>
+<tbody style="font-family: 'IBM Plex Mono', monospace">
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 6px; font-family: 'IBM Plex Sans', sans-serif">28 Sep</td>
+<td style="padding: 6px; text-align: right">30</td>
+<td style="padding: 6px; text-align: right">780</td>
+<td style="padding: 6px; text-align: right">10%</td>
+<td style="padding: 6px; text-align: right">702</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 6px; font-family: 'IBM Plex Sans', sans-serif">12 Aug</td>
+<td style="padding: 6px; text-align: right">50</td>
+<td style="padding: 6px; text-align: right">720</td>
+<td style="padding: 6px; text-align: right">10%</td>
+<td style="padding: 6px; text-align: right">648</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 6px; font-family: 'IBM Plex Sans', sans-serif">3 Apr</td>
+<td style="padding: 6px; text-align: right">40</td>
+<td style="padding: 6px; text-align: right">720</td>
+<td style="padding: 6px; text-align: right">12%</td>
+<td style="padding: 6px; text-align: right">634</td>
+</tr>
+</tbody>
+</table>
+<div style="display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 13px; color: #5B6168; border-top: 1px solid #ECE9E2; padding-top: 8px">
+<span>This year: <strong style="color: #1B1F24">120 bought, 0 returned</strong></span>
+<a href="#">Full history</a>
+</div>
+<div style="font-size: 12px; color: #5B6168">Last purchase rate: <span style="font-family: 'IBM Plex Mono', monospace; color: #1B1F24">546</span> on 2 Oct · managers only</div>
+</section>
+
+<section aria-label="Find an item" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Find an item</h2>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="brand" style="font-size: 12px; color: #5B6168">Company (F4)</label>
+<div style="display: flex; align-items: center; gap: 6px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 5px 6px 5px 8px">
+<span style="display: inline-flex; align-items: center; gap: 4px; background: #E3F1EF; color: #084F4B; border-radius: 4px; padding: 3px 4px 3px 8px; font-weight: 600; font-size: 13px">Oxford
+<button aria-label="Clear company" style="border: 0; background: transparent; color: #084F4B; width: 24px; height: 24px; padding: 0; display: inline-flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+</span>
+<input id="brand" placeholder="Any company" style="border: 0; outline: 0; flex: 1; min-width: 0; padding: 4px 0">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="search" style="font-size: 12px; color: #5B6168">Name, author or ISBN (F3)</label>
+<div style="display: flex; align-items: center; gap: 8px; border: 1px solid #C9C5BB; border-radius: 6px; padding: 0 10px">
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="#5B6168" stroke-width="1.6" fill="none"/><path d="M11 11l3.5 3.5" stroke="#5B6168" stroke-width="1.6"/></svg>
+<input id="search" value="science" style="border: 0; outline: 0; padding: 9px 0; flex: 1; min-width: 0">
+</div>
+</div>
+<span style="font-size: 12px; color: #5B6168">4 Oxford items · ↑ ↓ then Enter</span>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px">
+<thead>
+<tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 5px 6px; font-weight: 500">Code</th>
+<th style="padding: 5px 6px; font-weight: 500">Item</th>
+<th style="padding: 5px 6px; font-weight: 500; text-align: right">Stock</th>
+<th style="padding: 5px 6px; font-weight: 500; text-align: right">Price</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 7px 6px; font-family: 'IBM Plex Mono', monospace">1101</td>
+<td style="padding: 7px 6px">Oxford Science 6</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">42</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,150</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2; background: #E3F1EF">
+<td style="padding: 7px 6px; font-family: 'IBM Plex Mono', monospace; font-weight: 600">1102</td>
+<td style="padding: 7px 6px; font-weight: 600">Oxford Science 7</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">36</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,200</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 7px 6px; font-family: 'IBM Plex Mono', monospace">1103</td>
+<td style="padding: 7px 6px">Oxford Science 8</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">18</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">1,280</td>
+</tr>
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 7px 6px; font-family: 'IBM Plex Mono', monospace">1240</td>
+<td style="padding: 7px 6px">Oxford Science Workbook 7</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">60</td>
+<td style="padding: 7px 6px; text-align: right; font-family: 'IBM Plex Mono', monospace">450</td>
+</tr>
+</tbody>
+</table>
+</section>
+</aside>
+</main>
+
+<section aria-label="Totals and payment" style="background: #FFFFFF; border-top: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 16px 20px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: stretch">
+
+<div style="flex: 1 1 360px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 20px; align-content: center">
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Gross</span><span style="font-family: 'IBM Plex Mono', monospace">67,100</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Discount</span><span style="font-family: 'IBM Plex Mono', monospace">− 6,870</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Delivery charges</span><span style="font-family: 'IBM Plex Mono', monospace">500</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Previous balance</span><span style="font-family: 'IBM Plex Mono', monospace">24,300</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Total due</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">85,030</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Balance to ledger</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">45,030</span></div>
+</div>
+
+<div style="flex: 0 1 auto; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid #ECE9E2; padding-left: 28px">
+<span style="font-size: 13px; color: #5B6168">This bill</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 34px; font-weight: 600; line-height: 1.1">Rs. 60,730</span>
+</div>
+
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 8px">
+<div role="group" aria-label="Payment mode" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Cash</button>
+<button aria-pressed="true" style="border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 44px; font-weight: 600">Bank</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Card</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 44px">Wallet</button>
+</div>
+<div style="display: flex; align-items: center; gap: 10px">
+<label for="received" style="font-size: 13px; color: #5B6168; white-space: nowrap">Amount received</label>
+<input id="received" value="40,000" style="flex: 1; min-width: 0; border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; text-align: right">
+</div>
+</div>
+
+<div style="flex: 1 1 260px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: center">
+<div role="radiogroup" aria-label="Print language" style="grid-column: 1 / span 2; display: flex; align-items: center; gap: 8px">
+<span style="font-size: 13px; color: #5B6168">Print in</span>
+<button role="radio" aria-checked="true" style="flex: 1; border: 2px solid {{accent}}; background: #E3F1EF; border-radius: 6px; min-height: 36px; font-weight: 600">English</button>
+<button role="radio" aria-checked="false" style="flex: 1; border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 36px">اردو Urdu</button>
+</div>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px">Hold (F8) · 2 held</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px">Quotation</button>
+<button style="grid-column: 1 / span 2; border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 52px; font-size: 16px; font-weight: 600">Save and print (F10)</button>
+</div>
+</div>
+</section>
+
+<footer style="background: #1B1F24; color: #D9DCE0; font-size: 13px">
+<div style="max-width: 1440px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 8px 22px">
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F2</strong> Code</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F3</strong> Search</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F4</strong> Company</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F5</strong> Full history</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F6</strong> Client</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F7</strong> Bill discount</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F8</strong> Hold</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">F10</strong> Save and print</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">Del</strong> Remove line</span>
+<span><strong style="color: #FFFFFF; font-family: 'IBM Plex Mono', monospace">Esc</strong> Cancel</span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>

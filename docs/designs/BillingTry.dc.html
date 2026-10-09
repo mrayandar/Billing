@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Billing, try it</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4; display: flex; flex-direction: column">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 12px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+<span style="font-weight: 700; font-size: 17px">Nabeel Dar Book Depot</span>
+<span style="background: #FBEFD9; color: #7A4E00; border-radius: 4px; padding: 3px 10px; font-size: 13px; font-weight: 600">Try it: type a code such as 3307 and press Enter</span>
+<span style="margin-left: auto; color: #5B6168">Wholesale · Bill C1-1043</span>
+</div>
+</header>
+
+<main style="flex: 1; width: 100%; max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+<div style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="Client" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: baseline">
+<span><span style="font-size: 12px; color: #5B6168">Client</span> <strong style="font-size: 16px">Ali Traders</strong></span>
+<span style="color: #5B6168">Company discounts: Oxford 10% · Paramount 8% · Dollar 5%</span>
+<span style="color: #5B6168">Previous balance <span style="font-family: 'IBM Plex Mono', monospace; color: #1B1F24">24,300</span></span>
+</section>
+
+<section aria-label="Add item" style="background: #FFFFFF; border: 2px solid #0B6B66; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px; width: 100px">
+<label for="t-code" style="font-size: 12px; color: #5B6168">Code</label>
+<input id="t-code" ref="{{refCode}}" value="{{code}}" onChange="{{onCode}}" onKeyDown="{{onKey}}" onFocus="{{focusCode}}" autocomplete="off" style="border: {{codeB}}; outline: {{codeO}}; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; width: 100%; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 200px; min-width: 0">
+<span style="font-size: 12px; color: #5B6168">Item</span>
+<div style="border: 1px solid #E5E2DA; background: #FAF9F6; border-radius: 6px; padding: 9px 10px; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 21px">{{itemLabel}}</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 104px">
+<label for="t-price" style="font-size: 12px; color: #5B6168">Price</label>
+<input id="t-price" ref="{{refPrice}}" value="{{price}}" onChange="{{onPrice}}" onKeyDown="{{onKey}}" onFocus="{{focusPrice}}" inputmode="decimal" autocomplete="off" style="border: {{priceB}}; outline: {{priceO}}; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right; width: 100%; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 80px">
+<label for="t-qty" style="font-size: 12px; color: #5B6168">Qty</label>
+<input id="t-qty" ref="{{refQty}}" value="{{qty}}" onChange="{{onQty}}" onKeyDown="{{onKey}}" onFocus="{{focusQty}}" inputmode="numeric" autocomplete="off" style="border: {{qtyB}}; outline: {{qtyO}}; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right; width: 100%; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 84px">
+<label for="t-disc" style="font-size: 12px; color: #5B6168">Disc %</label>
+<input id="t-disc" ref="{{refDisc}}" value="{{disc}}" onChange="{{onDisc}}" onKeyDown="{{onKey}}" onFocus="{{focusDisc}}" inputmode="decimal" autocomplete="off" style="border: {{discB}}; outline: {{discO}}; border-radius: 6px; padding: 8px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; text-align: right; width: 100%; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 96px">
+<span style="font-size: 12px; color: #5B6168">Line total</span>
+<div style="padding: 9px 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; text-align: right">{{preview}}</div>
+</div>
+<button onClick="{{addClick}}" style="background: #0B6B66; color: #FFFFFF; border: 0; border-radius: 6px; padding: 0 18px; min-height: 44px; font-weight: 600">Add ⏎</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: center; font-size: 13px; color: #5B6168">
+<label style="display: inline-flex; align-items: center; gap: 6px; color: #1B1F24; min-height: 28px"><input type="checkbox" checked="{{saveRule}}" onChange="{{toggleSave}}" style="width: 16px; height: 16px; margin: 0; accent-color: #0B6B66"> Save this price and discount for Ali Traders (F9)</label>
+<span>{{sourceText}}</span>
+<span>Esc clears the row</span>
+</div>
+<sc-if value="{{hasMsg}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="border-radius: 6px; padding: 8px 12px; font-size: 13px; background: {{msgBg}}; color: {{msgColor}}">{{msg}}</div>
+</sc-if>
+</section>
+
+<section aria-label="Bill lines" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Bill · {{lineCount}} lines</h2>
+<sc-if value="{{noLines}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 24px; text-align: center; color: #5B6168; border: 1px dashed #DEDBD3; border-radius: 8px">No items yet. Type a code above, or pick one from the list on the right.</div>
+</sc-if>
+<sc-if value="{{hasLines}}" hint-placeholder-val="{{ false }}">
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 700px">
+<thead>
+<tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500">Code</th>
+<th style="padding: 6px 8px; font-weight: 500">Item</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Price</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Qty</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Disc</th>
+<th style="padding: 6px 8px; font-weight: 500">From</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Total</th>
+<th style="padding: 6px 8px; font-weight: 500"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+<tr style="border-top: 1px solid #ECE9E2">
+<td style="padding: 8px; font-family: 'IBM Plex Mono', monospace">{{l.code}}</td>
+<td style="padding: 8px">{{l.name}}</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">{{l.priceText}}</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">{{l.qty}}</td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">{{l.discText}}</td>
+<td style="padding: 8px"><span style="background: {{l.badgeBg}}; color: {{l.badgeColor}}; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600">{{l.source}}</span></td>
+<td style="padding: 8px; text-align: right; font-family: 'IBM Plex Mono', monospace">{{l.totalText}}</td>
+<td style="padding: 4px 8px; text-align: right; white-space: nowrap">
+<button onClick="{{l.edit}}" aria-label="{{l.editLabel}}" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 34px; padding: 0 10px; font-size: 13px">Edit</button>
+<button onClick="{{l.remove}}" aria-label="{{l.removeLabel}}" style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 6px; min-height: 34px; padding: 0 10px; font-size: 13px; color: #8E2F21">Remove</button>
+</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</sc-if>
+</section>
+</div>
+
+<aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section aria-label="History" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">History with Ali Traders</h2>
+<span style="font-weight: 600">{{historyTitle}}</span>
+<sc-for list="{{history}}" as="h" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 8px; border-top: 1px solid #ECE9E2; padding-top: 6px; font-size: 13px"><span>{{h.date}}</span><span style="font-family: 'IBM Plex Mono', monospace">{{h.text}}</span></div>
+</sc-for>
+<span style="font-size: 13px; color: #5B6168">{{historyNote}}</span>
+</section>
+
+<section aria-label="Find an item" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+<label for="t-search" style="font-size: 12px; color: #5B6168">Find by name or company, then click</label>
+<input id="t-search" value="{{search}}" onChange="{{onSearch}}" placeholder="e.g. science or oxford" autocomplete="off" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px">
+<sc-for list="{{found}}" as="f" hint-placeholder-count="5">
+<button onClick="{{f.pick}}" style="display: flex; justify-content: space-between; gap: 8px; text-align: left; border: 0; border-top: 1px solid #ECE9E2; background: #FFFFFF; padding: 8px 4px; min-height: 40px">
+<span><span style="font-family: 'IBM Plex Mono', monospace; color: #5B6168">{{f.code}}</span> {{f.name}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace">{{f.priceText}}</span>
+</button>
+</sc-for>
+</section>
+</aside>
+</main>
+
+<section aria-label="Totals" style="background: #FFFFFF; border-top: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 16px 20px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 36px; align-items: center">
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Gross</span><span style="font-family: 'IBM Plex Mono', monospace">{{grossText}}</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Discount</span><span style="font-family: 'IBM Plex Mono', monospace">{{discountText}}</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Previous balance</span><span style="font-family: 'IBM Plex Mono', monospace">24,300</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #5B6168">Total due</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">{{dueText}}</span></div>
+<div style="display: flex; flex-direction: column; margin-left: auto"><span style="font-size: 13px; color: #5B6168">This bill</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 600; line-height: 1.1">Rs. {{netText}}</span></div>
+<button onClick="{{saveBill}}" style="border: 0; background: #0B6B66; color: #FFFFFF; border-radius: 8px; min-height: 52px; padding: 0 22px; font-size: 16px; font-weight: 600">Save and print</button>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.catalog = [
+{ code: '1045', name: 'Oxford Primary English 5', company: 'Oxford', price: 850, stock: 118, history: [{ date: '12 Aug', text: '20 × 748 (12%)' }, { date: '3 Apr', text: '40 × 748 (12%)' }] },
+{ code: '1101', name: 'Oxford Science 6', company: 'Oxford', price: 1150, stock: 42, history: [] },
+{ code: '1102', name: 'Oxford Science 7', company: 'Oxford', price: 1200, stock: 36, history: [{ date: '28 Sep', text: '10 × 1,080 (10%)' }] },
+{ code: '1103', name: 'Oxford Science 8', company: 'Oxford', price: 1280, stock: 4, history: [] },
+{ code: '1150', name: 'Oxford Atlas for Pakistan', company: 'Oxford', price: 2500, stock: 11, history: [{ date: '12 Aug', text: '5 × 2,250 (10%)' }] },
+{ code: '2210', name: 'Paramount Mathematics 6', company: 'Paramount', price: 640, stock: 58, history: [{ date: '28 Sep', text: '25 × 589 (8%)' }] },
+{ code: '2215', name: 'Paramount English 3', company: 'Paramount', price: 520, stock: 6, history: [] },
+{ code: '3307', name: 'Oxford Social Studies 4', company: 'Oxford', price: 780, stock: 46, history: [{ date: '28 Sep', text: '30 × 702 (10%)' }, { date: '12 Aug', text: '50 × 648 (10%)' }, { date: '3 Apr', text: '40 × 634 (12%)' }] },
+{ code: '5031', name: 'Dollar Gel Pen Blue (box)', company: 'Dollar', price: 360, stock: 40, history: [{ date: '28 Sep', text: '10 × 342 (5%)' }] }
+];
+this.companyDisc = { Oxford: 10, Paramount: 8, Dollar: 5 };
+this.el = {};
+this.refCode = (e) => { this.el.code = e; };
+this.refPrice = (e) => { this.el.price = e; };
+this.refQty = (e) => { this.el.qty = e; };
+this.refDisc = (e) => { this.el.disc = e; };
+this.state = { step: 'code', code: '', price: '', qty: '', disc: '', item: null, source: '', saveRule: false, lines: [], msg: '', msgKind: 'info', search: '', rules: { '1045': { disc: 12 }, '2215': { disc: 6 } }, focusTick: 0, nextId: 1 };
+}
+componentDidMount() { this.focusStep(); }
+componentDidUpdate(prevProps, prevState) {
+if (prevState.step !== this.state.step || prevState.focusTick !== this.state.focusTick) this.focusStep();
+}
+focusStep() {
+const e = this.el[this.state.step];
+if (e && document.activeElement !== e) { e.focus(); if (e.select) e.select(); }
+}
+fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+ruleFor(item) {
+const book = this.state.rules[item.code];
+if (book) return { price: book.price != null ? book.price : item.price, disc: book.disc, source: 'Book' };
+const c = this.companyDisc[item.company];
+if (c != null) return { price: item.price, disc: c, source: 'Company' };
+return { price: item.price, disc: 0, source: 'None' };
+}
+pick(item) {
+const r = this.ruleFor(item);
+this.setState({ item: item, code: item.code, price: String(r.price), qty: '1', disc: String(r.disc), source: r.source, step: 'price', msg: '', focusTick: this.state.focusTick + 1 });
+}
+reset() {
+this.setState({ step: 'code', code: '', price: '', qty: '', disc: '', item: null, source: '', saveRule: false, msg: '', focusTick: this.state.focusTick + 1 });
+}
+addLine() {
+const s = this.state;
+if (!s.item) { this.setState({ msg: 'Type a code and press Enter first.', msgKind: 'warn', step: 'code', focusTick: s.focusTick + 1 }); return; }
+const price = parseFloat(s.price) || 0;
+const qty = parseFloat(s.qty) || 0;
+const disc = parseFloat(s.disc) || 0;
+if (qty <= 0) { this.setState({ msg: 'Quantity must be at least 1.', msgKind: 'warn', step: 'qty', focusTick: s.focusTick + 1 }); return; }
+const r = this.ruleFor(s.item);
+const changed = price !== r.price || disc !== r.disc;
+let rules = s.rules;
+let msg = '';
+let source = r.source;
+if (changed && s.saveRule) {
+const rule = { disc: disc };
+if (price !== s.item.price) rule.price = price;
+rules = Object.assign({}, rules);
+rules[s.item.code] = rule;
+msg = 'Saved for Ali Traders: ' + s.item.name + ' at ' + this.fmt(price) + ' less ' + disc + '%. It applies automatically next time.';
+source = 'Book';
+} else if (changed) {
+source = 'Manual';
+}
+const line = { id: s.nextId, code: s.item.code, name: s.item.name, price: price, qty: qty, disc: disc, source: source, total: price * qty * (1 - disc / 100) };
+this.setState({ lines: s.lines.concat([line]), rules: rules, nextId: s.nextId + 1, step: 'code', code: '', price: '', qty: '', disc: '', item: null, source: '', saveRule: false, msg: msg, msgKind: 'ok', focusTick: s.focusTick + 1 });
+}
+onKey(e) {
+if (e.key === 'Escape') { e.preventDefault(); this.reset(); return; }
+if (e.key === 'F9') { e.preventDefault(); this.setState({ saveRule: !this.state.saveRule }); return; }
+if (e.key !== 'Enter') return;
+e.preventDefault();
+const s = this.state;
+if (s.step === 'code') {
+const it = this.catalog.find((c) => c.code === s.code.trim());
+if (!it) { this.setState({ msg: s.code.trim() ? 'No item with code ' + s.code.trim() + '. Try one from the list on the right.' : 'Type an item code first, for example 3307.', msgKind: 'warn' }); return; }
+this.pick(it);
+} else if (s.step === 'price') {
+this.setState({ step: 'qty' });
+} else if (s.step === 'qty') {
+this.setState({ step: 'disc' });
+} else {
+this.addLine();
+}
+}
+edit(line) {
+const item = this.catalog.find((c) => c.code === line.code);
+this.setState({ lines: this.state.lines.filter((l) => l.id !== line.id), item: item, code: line.code, price: String(line.price), qty: String(line.qty), disc: String(line.disc), source: line.source, step: 'qty', msg: 'Editing ' + line.name + '. Change it and press Enter to put it back on the bill.', msgKind: 'info', focusTick: this.state.focusTick + 1 });
+}
+remove(line) {
+this.setState({ lines: this.state.lines.filter((l) => l.id !== line.id), msg: line.name + ' removed.', msgKind: 'info', focusTick: this.state.focusTick + 1 });
+}
+renderVals() {
+const s = this.state;
+const on = (k) => s.step === k;
+const B = (k) => on(k) ? '2px solid #0B6B66' : '1px solid #C9C5BB';
+const O = (k) => on(k) ? '3px solid #BFE0DC' : '0';
+const price = parseFloat(s.price) || 0;
+const qty = parseFloat(s.qty) || 0;
+const disc = parseFloat(s.disc) || 0;
+const badge = { Book: ['#E3F1EF', '#084F4B'], Company: ['#EEECE6', '#3D4248'], Manual: ['#FBEFD9', '#7A4E00'], None: ['#EEECE6', '#3D4248'] };
+const lines = s.lines.map((l) => ({
+code: l.code, name: l.name, qty: l.qty, source: l.source,
+priceText: this.fmt(l.price), discText: l.disc + '%', totalText: this.fmt(l.total),
+badgeBg: badge[l.source][0], badgeColor: badge[l.source][1],
+editLabel: 'Edit ' + l.name, removeLabel: 'Remove ' + l.name,
+edit: () => this.edit(l), remove: () => this.remove(l)
+}));
+const gross = s.lines.reduce((a, l) => a + l.price * l.qty, 0);
+const net = s.lines.reduce((a, l) => a + l.total, 0);
+const q = s.search.trim().toLowerCase();
+const found = this.catalog.filter((c) => !q || (c.name + ' ' + c.company + ' ' + c.code).toLowerCase().indexOf(q) >= 0).map((c) => ({ code: c.code, name: c.name, priceText: this.fmt(c.price), pick: () => this.pick(c) }));
+const item = s.item;
+const srcText = item ? (s.source === 'Book' ? 'Discount from: book rule for Ali Traders' : s.source === 'Company' ? 'Discount from: company rule, ' + item.company + ' ' + this.companyDisc[item.company] + '%' : 'No discount rule for this item') : 'Price and discount fill in automatically from the client’s rules';
+const msgStyle = { ok: ['#E3F1EF', '#084F4B'], warn: ['#FBEFD9', '#7A4E00'], info: ['#EEECE6', '#3D4248'] }[s.msgKind];
+return {
+code: s.code, price: s.price, qty: s.qty, disc: s.disc, search: s.search, saveRule: s.saveRule,
+refCode: this.refCode, refPrice: this.refPrice, refQty: this.refQty, refDisc: this.refDisc,
+codeB: B('code'), codeO: O('code'), priceB: B('price'), priceO: O('price'), qtyB: B('qty'), qtyO: O('qty'), discB: B('disc'), discO: O('disc'),
+onCode: (e) => this.setState({ code: e.target.value, msg: '' }),
+onPrice: (e) => this.setState({ price: e.target.value }),
+onQty: (e) => this.setState({ qty: e.target.value }),
+onDisc: (e) => this.setState({ disc: e.target.value }),
+onSearch: (e) => this.setState({ search: e.target.value }),
+focusCode: () => { if (s.step !== 'code') this.setState({ step: 'code' }); },
+focusPrice: () => { if (s.item && s.step !== 'price') this.setState({ step: 'price' }); },
+focusQty: () => { if (s.item && s.step !== 'qty') this.setState({ step: 'qty' }); },
+focusDisc: () => { if (s.item && s.step !== 'disc') this.setState({ step: 'disc' }); },
+onKey: (e) => this.onKey(e),
+toggleSave: () => this.setState({ saveRule: !s.saveRule, focusTick: s.focusTick + 1 }),
+addClick: () => this.addLine(),
+itemLabel: item ? item.name + ' · ' + item.company + ' · stock ' + item.stock : '',
+preview: item ? this.fmt(price * qty * (1 - disc / 100)) : '',
+sourceText: srcText,
+hasMsg: !!s.msg, msg: s.msg, msgBg: msgStyle[0], msgColor: msgStyle[1],
+lines: lines, lineCount: s.lines.length, noLines: s.lines.length === 0, hasLines: s.lines.length > 0,
+historyTitle: item ? item.name : 'Pick an item to see its history',
+history: item ? item.history : [],
+historyNote: item ? (item.history.length ? 'Last ' + item.history.length + ' sales to this client' : 'Not sold to Ali Traders before') : '',
+found: found,
+grossText: this.fmt(gross), discountText: '− ' + this.fmt(gross - net), netText: this.fmt(net), dueText: this.fmt(24300 + net),
+saveBill: () => { if (!s.lines.length) { this.setState({ msg: 'The bill is empty.', msgKind: 'warn' }); return; } this.setState({ lines: [], msg: 'Bill saved and sent to the printer (prototype). Ready for the next bill.', msgKind: 'ok', step: 'code', focusTick: s.focusTick + 1 }); }
+};
+}
+}
+</script>
+</body>
+</html>

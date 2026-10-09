@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reports</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid {{accent}}">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 16px; background: #E8E6E0; font-weight: 600; font-size: 13px">O</span>
+</div>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 20px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<nav aria-label="Reports" style="flex: 1 1 280px; min-width: 0; background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 14px">
+<label for="rsearch" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Find a report</label>
+<input id="rsearch" placeholder="Find a report" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 8px 10px">
+
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168; padding: 0 8px 4px">SALES</span>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Daily sales summary</a>
+<a href="#" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 6px 8px; border-radius: 6px; background: #E3F1EF">Sales by cashier</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by shift and counter</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by client</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by item</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by company</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by category</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by payment mode</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Retail vs wholesale</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales by hour and day</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Discounts given</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Returns</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Quotations and orders</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">This season vs last season</a>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168; padding: 0 8px 4px">PROFIT</span>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Profit by item, company or category</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Profit by client</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Profit by period</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Sales below cost</a>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168; padding: 0 8px 4px">STOCK</span>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Stock on hand and value</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Stock movement</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Low stock and reorder</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Best and slow sellers</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Dead stock (no sale in N days)</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Damaged stock and write-offs</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Stock count differences</a>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168; padding: 0 8px 4px">PURCHASES</span>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Purchases by supplier</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Purchases by item or company</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Purchase returns</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Consignment stock</a>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168; padding: 0 8px 4px">MONEY</span>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Cash book and day closing</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Shift report and cash differences</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Amounts due from clients (aging)</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Amounts owed to suppliers</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Payments received and made</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Cheques: pending and bounced</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Expenses by head</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Tax report</a>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; color: #5B6168; padding: 0 8px 4px">CLIENTS AND CONTROL</span>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Top clients</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Customer requests and pre-orders</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Price and discount changes</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">Edited and cancelled bills</a>
+<a href="#" style="color: #1B1F24; text-decoration: none; padding: 6px 8px; border-radius: 6px">My saved reports</a>
+</div>
+</nav>
+
+<div style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div>
+<h1 style="margin: 0; font-size: 22px; font-weight: 600">Sales by cashier</h1>
+<span style="color: #5B6168">Bills, discounts, returns and cash each cashier handled · sample figures</span>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Save as my report</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">Excel</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">PDF</button>
+<button style="border: 1px solid #C9C5BB; background: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 14px">WhatsApp</button>
+<button style="border: 0; background: {{accent}}; color: #FFFFFF; border-radius: 8px; min-height: 44px; padding: 0 16px; font-weight: 600">Print</button>
+</div>
+</div>
+
+<section aria-label="Filters" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; color: #5B6168">Period</span>
+<div role="group" aria-label="Period" style="display: flex; border: 1px solid #C9C5BB; border-radius: 8px; overflow: hidden">
+<button aria-pressed="true" style="border: 0; background: {{accent}}; color: #FFFFFF; min-height: 40px; padding: 0 12px; font-weight: 600">Today</button>
+<button style="border: 0; background: #FFFFFF; min-height: 40px; padding: 0 12px">Yesterday</button>
+<button style="border: 0; background: #FFFFFF; min-height: 40px; padding: 0 12px">This week</button>
+<button style="border: 0; background: #FFFFFF; min-height: 40px; padding: 0 12px">This month</button>
+<button style="border: 0; background: #FFFFFF; min-height: 40px; padding: 0 12px">Custom</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 160px"><label for="rf-cashier" style="font-size: 12px; color: #5B6168">Cashier</label><input id="rf-cashier" value="All cashiers" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 150px"><label for="rf-counter" style="font-size: 12px; color: #5B6168">Counter</label><input id="rf-counter" value="All counters" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 150px"><label for="rf-type" style="font-size: 12px; color: #5B6168">Bill type</label><input id="rf-type" value="Retail and wholesale" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; width: 150px"><label for="rf-company" style="font-size: 12px; color: #5B6168">Company</label><input id="rf-company" value="All companies" style="border: 1px solid #C9C5BB; border-radius: 6px; padding: 9px 10px"></div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px">
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Net sales</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600">184,620</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Bills</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600">42</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Discounts given</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600">10,750</span></div>
+<div style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6168">Returns</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600">2,140</span></div>
+</div>
+
+<section aria-label="Report table" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 820px">
+<thead><tr style="text-align: left; color: #5B6168; font-size: 12px">
+<th style="padding: 6px 8px; font-weight: 500">Cashier</th>
+<th style="padding: 6px 8px; font-weight: 500">Counter</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Bills</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Gross</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Discount</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Returns</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Net sales</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Cash</th>
+<th style="padding: 6px 8px; font-weight: 500; text-align: right">Bank, card, wallet</th>
+</tr></thead>
+<tbody style="font-family: 'IBM Plex Mono', monospace">
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500"><a href="#">Usman</a></td><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif">Counter 1</td><td style="padding: 9px 8px; text-align: right">24</td><td style="padding: 9px 8px; text-align: right">104,900</td><td style="padding: 9px 8px; text-align: right">6,280</td><td style="padding: 9px 8px; text-align: right">1,150</td><td style="padding: 9px 8px; text-align: right; font-weight: 600">97,470</td><td style="padding: 9px 8px; text-align: right">34,200</td><td style="padding: 9px 8px; text-align: right">63,270</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500"><a href="#">Bilal</a></td><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif">Counter 2</td><td style="padding: 9px 8px; text-align: right">15</td><td style="padding: 9px 8px; text-align: right">82,400</td><td style="padding: 9px 8px; text-align: right">3,990</td><td style="padding: 9px 8px; text-align: right">990</td><td style="padding: 9px 8px; text-align: right; font-weight: 600">77,420</td><td style="padding: 9px 8px; text-align: right">21,700</td><td style="padding: 9px 8px; text-align: right">55,720</td></tr>
+<tr style="border-top: 1px solid #ECE9E2"><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500"><a href="#">Owner</a></td><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif">Phone M1</td><td style="padding: 9px 8px; text-align: right">3</td><td style="padding: 9px 8px; text-align: right">10,210</td><td style="padding: 9px 8px; text-align: right">480</td><td style="padding: 9px 8px; text-align: right">0</td><td style="padding: 9px 8px; text-align: right; font-weight: 600">9,730</td><td style="padding: 9px 8px; text-align: right">3,000</td><td style="padding: 9px 8px; text-align: right">6,730</td></tr>
+</tbody>
+<tfoot style="font-family: 'IBM Plex Mono', monospace"><tr style="border-top: 2px solid #DEDBD3; font-weight: 600"><td style="padding: 9px 8px; font-family: 'IBM Plex Sans', sans-serif" colspan="2">Total</td><td style="padding: 9px 8px; text-align: right">42</td><td style="padding: 9px 8px; text-align: right">197,510</td><td style="padding: 9px 8px; text-align: right">10,750</td><td style="padding: 9px 8px; text-align: right">2,140</td><td style="padding: 9px 8px; text-align: right">184,620</td><td style="padding: 9px 8px; text-align: right">58,900</td><td style="padding: 9px 8px; text-align: right">125,720</td></tr></tfoot>
+</table>
+</div>
+<span style="font-size: 13px; color: #5B6168">Click a cashier to see their bills one by one. Group by day, week or month from the period filter.</span>
+</section>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B66","options":["#0B6B66","#1F4E8C","#7A3E8F","#9A4A1F"]},"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#0B6B66' };
+}
+}
+</script>
+</body>
+</html>
