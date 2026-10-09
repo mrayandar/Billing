@@ -41,3 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# generated Prisma client
+/src/generated
+
+# large design export kept locally only
+/docs/designs/Book Shop Billing Screens.pdf

@@ -1,7 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// Nabeel Dar Book Depot — Phase 1 database (build step 1).
+//
+// Rules that shape this file:
+//  - Money is an integer in paisa (Rs. 1 = 100). Discount percentages are integer
+//    basis points (10% = 1000). No floating point anywhere.
+//  - Bills, payments and purchases are never deleted: status = CANCELLED instead.
+//  - Stock and balances are never overwritten. Stock on hand = sum of stock_movements,
+//    a client or supplier balance = sum of ledger_entries.
 
 generator client {
   provider = "prisma-client"
@@ -10,4 +14,724 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ───────────── Enums ─────────────
+
+enum CompanyType {
+  PUBLISHER
+  MANUFACTURER
+}
+
+enum ItemStatus {
+  ACTIVE
+  INACTIVE
+  OLD_EDITION
+  DISCONTINUED
+}
+
+enum ClientType {
+  RETAIL
+  WHOLESALE
+  SCHOOL
+  SUB_DEALER
+}
+
+enum OverLimitAction {
+  WARN
+  BLOCK
+}
+
+enum Language {
+  EN
+  UR
+}
+
+enum DocStatus {
+  ACTIVE
+  CANCELLED
+}
+
+enum SaleType {
+  RETAIL
+  WHOLESALE
+}
+
+enum DiscountSource {
+  BOOK_RULE
+  COMPANY_RULE
+  MANUAL
+  NONE
+}
+
+enum PaymentMode {
+  CASH
+  CARD
+  BANK
+  WALLET
+  CHEQUE
+}
+
+enum ChequeStatus {
+  PENDING
+  CLEARED
+  BOUNCED
+}
+
+enum PartyType {
+  CLIENT
+  SUPPLIER
+}
+
+enum RefundMethod {
+  CASH
+  CREDIT_NOTE
+  EXCHANGE
+  LEDGER
+}
+
+enum ItemCondition {
+  GOOD
+  DAMAGED
+}
+
+enum StockDocType {
+  OPENING
+  PURCHASE
+  PURCHASE_CANCEL
+  SALE
+  SALE_CANCEL
+  SALE_RETURN
+  ADJUSTMENT
+}
+
+enum LedgerDocType {
+  OPENING
+  SALE
+  SALE_CANCEL
+  PURCHASE
+  PURCHASE_CANCEL
+  PAYMENT
+  PAYMENT_CANCEL
+  CHEQUE_BOUNCE
+  SALE_RETURN
+  CREDIT_NOTE
+  ADJUSTMENT
+}
+
+enum ShiftStatus {
+  OPEN
+  CLOSED
+}
+
+// ───────────── People and access (US-01..04) ─────────────
+
+model Role {
+  id              Int              @id @default(autoincrement())
+  name            String           @unique
+  // Highest discount this role may give without approval (PR-07), in basis points.
+  discountLimitBp Int              @default(0)
+  users           User[]
+  permissions     RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  key         String           @id
+  description String
+  roles       RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  roleId        Int
+  permissionKey String
+  role          Role       @relation(fields: [roleId], references: [id])
+  permission    Permission @relation(fields: [permissionKey], references: [key])
+
+  @@id([roleId, permissionKey])
+  @@map("role_permissions")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  name         String
+  passwordHash String
+  roleId       Int
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  role         Role     @relation(fields: [roleId], references: [id])
+
+  @@map("users")
+}
+
+// One row per counter / phone. Gives each device its own bill number series (NF-15).
+model Device {
+  id         Int        @id @default(autoincrement())
+  name       String
+  billPrefix String     @unique // e.g. "C1", "M1"
+  nextNumber Int        @default(1001)
+  sales      Sale[]
+  shifts     Shift[]
+  heldBills  HeldBill[]
+
+  @@map("devices")
+}
+
+// ───────────── Catalogue (PM-01..08) ─────────────
+
+// "Company" = publisher or manufacturer (older notes say "brand").
+model Company {
+  id                Int                       @id @default(autoincrement())
+  name              String                    @unique
+  type              CompanyType               @default(PUBLISHER)
+  items             Item[]
+  clientDiscounts   ClientCompanyDiscount[]
+  supplierDiscounts SupplierCompanyDiscount[]
+
+  @@map("companies")
+}
+
+model Category {
+  id       Int        @id @default(autoincrement())
+  name     String
+  parentId Int?
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+  items    Item[]
+
+  @@unique([parentId, name])
+  @@map("categories")
+}
+
+model Item {
+  id             Int        @id @default(autoincrement())
+  code           String     @unique // short code typed at the counter, e.g. "1045"
+  name           String
+  nameUrdu       String? // printed when a bill is printed in Urdu
+  searchSpelling String? // English spelling of an Urdu title, for search (PM-13)
+  isbn           String?
+  author         String?
+  subject        String?
+  language       String?
+  classGrade     String?
+  companyId      Int
+  categoryId     Int?
+  basePrice      Int // paisa; newest batch price
+  costPrice      Int        @default(0) // paisa; average cost
+  baseUnit       String     @default("piece")
+  minStock       Int        @default(0)
+  status         ItemStatus @default(ACTIVE)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  company       Company          @relation(fields: [companyId], references: [id])
+  category      Category?        @relation(fields: [categoryId], references: [id])
+  barcodes      ItemBarcode[]
+  units         ItemUnit[]
+  batches       ItemBatch[]
+  clientRules   ClientItemRule[]
+  saleLines     SaleLine[]
+  purchaseLines PurchaseLine[]
+  returnLines   ReturnLine[]
+  movements     StockMovement[]
+
+  @@index([name])
+  @@index([isbn])
+  @@index([companyId])
+  @@map("items")
+}
+
+model ItemBarcode {
+  id      Int     @id @default(autoincrement())
+  itemId  Int
+  barcode String  @unique
+  label   String? // "shop code", "ISBN", "maker"
+  item    Item    @relation(fields: [itemId], references: [id])
+
+  @@index([itemId])
+  @@map("item_barcodes")
+}
+
+model ItemUnit {
+  id       Int    @id @default(autoincrement())
+  itemId   Int
+  unitName String // "packet of 10", "box", "carton"
+  factor   Int // how many base units in one of this unit
+  item     Item   @relation(fields: [itemId], references: [id])
+
+  @@unique([itemId, unitName])
+  @@map("item_units")
+}
+
+// Stock of one item at one printed price (PM-12). Billing sells the oldest receivedDate first.
+// Quantity on hand is not stored here: it is the sum of stock_movements for the batch.
+model ItemBatch {
+  id            Int             @id @default(autoincrement())
+  itemId        Int
+  price         Int // paisa
+  barcode       String?         @unique
+  receivedDate  DateTime
+  item          Item            @relation(fields: [itemId], references: [id])
+  movements     StockMovement[]
+  saleLines     SaleLine[]
+  purchaseLines PurchaseLine[]
+  returnLines   ReturnLine[]
+
+  @@index([itemId, receivedDate])
+  @@map("item_batches")
+}
+
+// ───────────── Clients and their rules (WS-01, PR-02, PR-03) ─────────────
+
+model Client {
+  id              Int             @id @default(autoincrement())
+  code            String          @unique // e.g. "CL-0412"
+  name            String
+  type            ClientType      @default(WHOLESALE)
+  contactPerson   String?
+  mobile          String?
+  whatsapp        String?
+  phone2          String?
+  email           String?
+  address         String?
+  area            String?
+  city            String?
+  mapLink         String?
+  deliveryAddress String?
+  cnic            String?
+  ntn             String?
+  salesman        String?
+  referredBy      String?
+  linkedSchools   String?
+  notes           String?
+  creditLimit     Int             @default(0) // paisa
+  termsDays       Int             @default(0)
+  overLimitAction OverLimitAction @default(WARN)
+  sendInvoices    Boolean         @default(true)
+  sendReminders   Boolean         @default(true)
+  notifyArrivals  Boolean         @default(false)
+  messageLanguage Language        @default(EN)
+  billLanguage    Language? // overrides the shop default when set
+  active          Boolean         @default(true)
+  createdAt       DateTime        @default(now())
+
+  companyDiscounts ClientCompanyDiscount[]
+  itemRules        ClientItemRule[]
+  sales            Sale[]
+  payments         Payment[]
+  ledger           LedgerEntry[]
+  returns          Return[]
+  creditNotes      CreditNote[]
+  heldBills        HeldBill[]
+
+  @@index([name])
+  @@map("clients")
+}
+
+// Discount % for every item of one company, for one client.
+model ClientCompanyDiscount {
+  id          Int      @id @default(autoincrement())
+  clientId    Int
+  companyId   Int
+  discountBp  Int // basis points
+  updatedAt   DateTime @updatedAt
+  updatedById Int?
+  client      Client   @relation(fields: [clientId], references: [id])
+  company     Company  @relation(fields: [companyId], references: [id])
+
+  @@unique([clientId, companyId])
+  @@map("client_company_discounts")
+}
+
+// Book rule: a special price, a discount %, or both, for one item and one client.
+// Beats the company rule for that item only.
+model ClientItemRule {
+  id           Int      @id @default(autoincrement())
+  clientId     Int
+  itemId       Int
+  specialPrice Int? // paisa
+  discountBp   Int?
+  setFrom      String? // e.g. "Bill C1-0987" when saved from a bill with the tick
+  updatedAt    DateTime @updatedAt
+  updatedById  Int?
+  client       Client   @relation(fields: [clientId], references: [id])
+  item         Item     @relation(fields: [itemId], references: [id])
+
+  @@unique([clientId, itemId])
+  @@map("client_item_rules")
+}
+
+// ───────────── Suppliers and purchases (PU-01..05, PU-10..12) ─────────────
+
+model Supplier {
+  id          Int                       @id @default(autoincrement())
+  name        String
+  companyName String?
+  phone       String?
+  address     String?
+  termsDays   Int                       @default(0)
+  active      Boolean                   @default(true)
+  createdAt   DateTime                  @default(now())
+  discounts   SupplierCompanyDiscount[]
+  purchases   Purchase[]
+  payments    Payment[]
+  ledger      LedgerEntry[]
+
+  @@map("suppliers")
+}
+
+// Default purchase discount for a supplier + company (optionally one item, PU-11).
+model SupplierCompanyDiscount {
+  id         Int      @id @default(autoincrement())
+  supplierId Int
+  companyId  Int
+  itemId     Int?
+  discountBp Int
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  company    Company  @relation(fields: [companyId], references: [id])
+
+  @@index([supplierId, companyId])
+  @@map("supplier_company_discounts")
+}
+
+model Purchase {
+  id                Int            @id @default(autoincrement())
+  supplierId        Int
+  supplierInvoiceNo String
+  invoiceDate       DateTime
+  freight           Int            @default(0)
+  otherCharges      Int            @default(0)
+  total             Int // paisa
+  status            DocStatus      @default(ACTIVE)
+  cancelledAt       DateTime?
+  cancelledById     Int?
+  cancelReason      String?
+  userId            Int
+  createdAt         DateTime       @default(now())
+  supplier          Supplier       @relation(fields: [supplierId], references: [id])
+  lines             PurchaseLine[]
+
+  // PU-10: the same supplier invoice number cannot be entered twice.
+  @@unique([supplierId, supplierInvoiceNo])
+  @@map("purchases")
+}
+
+model PurchaseLine {
+  id           Int        @id @default(autoincrement())
+  purchaseId   Int
+  itemId       Int
+  batchId      Int?
+  qty          Int
+  unit         String     @default("piece")
+  unitFactor   Int        @default(1)
+  rate         Int // paisa per unit
+  freightShare Int        @default(0) // PU-12
+  lineTotal    Int
+  purchase     Purchase   @relation(fields: [purchaseId], references: [id])
+  item         Item       @relation(fields: [itemId], references: [id])
+  batch        ItemBatch? @relation(fields: [batchId], references: [id])
+
+  @@index([purchaseId])
+  @@map("purchase_lines")
+}
+
+// ───────────── Sales (RS-01..12, WS-02..07) ─────────────
+
+model Sale {
+  id              Int       @id @default(autoincrement())
+  billNo          String    @unique // "<device prefix>-<number>", e.g. C1-1042
+  deviceId        Int
+  type            SaleType
+  clientId        Int? // empty for a walk-in retail customer
+  walkInName      String?
+  walkInPhone     String?
+  userId          Int
+  shiftId         Int?
+  grossTotal      Int // sum of lines at the price used, before discount
+  discountTotal   Int
+  deliveryCharge  Int       @default(0)
+  total           Int // this bill = gross - discount + delivery
+  receivedAmount  Int       @default(0)
+  previousBalance Int       @default(0) // client balance before this bill
+  newBalance      Int       @default(0) // client balance after this bill
+  language        Language  @default(EN)
+  note            String?
+  status          DocStatus @default(ACTIVE)
+  cancelledAt     DateTime?
+  cancelledById   Int?
+  cancelReason    String?
+  createdAt       DateTime  @default(now())
+
+  device      Device              @relation(fields: [deviceId], references: [id])
+  client      Client?             @relation(fields: [clientId], references: [id])
+  shift       Shift?              @relation(fields: [shiftId], references: [id])
+  lines       SaleLine[]
+  payments    SalePayment[]
+  returns     Return[]
+  allocations PaymentAllocation[]
+
+  @@index([clientId, createdAt])
+  @@index([createdAt])
+  @@map("sales")
+}
+
+// A saved line keeps the prices and discounts used at the time (PR-13).
+model SaleLine {
+  id               Int            @id @default(autoincrement())
+  saleId           Int
+  lineNo           Int
+  itemId           Int
+  batchId          Int?
+  qty              Int
+  unit             String         @default("piece")
+  unitFactor       Int            @default(1)
+  basePrice        Int // item/batch base price at the time
+  price            Int // price actually used (base, or the client's special price)
+  discountBp       Int            @default(0)
+  discountSource   DiscountSource @default(NONE)
+  discountOverride Boolean        @default(false) // PR-15
+  lineTotal        Int
+  costAtSale       Int            @default(0) // for profit reports
+  sale             Sale           @relation(fields: [saleId], references: [id])
+  item             Item           @relation(fields: [itemId], references: [id])
+  batch            ItemBatch?     @relation(fields: [batchId], references: [id])
+  returnLines      ReturnLine[]
+
+  @@unique([saleId, lineNo])
+  @@index([itemId])
+  @@map("sale_lines")
+}
+
+// How a retail bill was paid; split payments have several rows (RS-06).
+model SalePayment {
+  id     Int         @id @default(autoincrement())
+  saleId Int
+  mode   PaymentMode
+  amount Int
+  sale   Sale        @relation(fields: [saleId], references: [id])
+
+  @@index([saleId])
+  @@map("sale_payments")
+}
+
+model HeldBill {
+  id        Int      @id @default(autoincrement())
+  deviceId  Int
+  userId    Int
+  clientId  Int?
+  label     String?
+  data      Json // the bill as it was on screen
+  createdAt DateTime @default(now())
+  device    Device   @relation(fields: [deviceId], references: [id])
+  client    Client?  @relation(fields: [clientId], references: [id])
+
+  @@map("held_bills")
+}
+
+// ───────────── Payments, ledgers, cash (LA-01..05, LA-09..14) ─────────────
+
+// Money received from a client or paid to a supplier.
+model Payment {
+  id              Int           @id @default(autoincrement())
+  number          String        @unique // e.g. "PR-1001"
+  partyType       PartyType
+  clientId        Int?
+  supplierId      Int?
+  amount          Int
+  mode            PaymentMode
+  chequeNo        String?
+  chequeBank      String?
+  chequeDate      DateTime?
+  chequeStatus    ChequeStatus?
+  previousBalance Int           @default(0)
+  newBalance      Int           @default(0)
+  userId          Int
+  shiftId         Int?
+  note            String?
+  status          DocStatus     @default(ACTIVE)
+  cancelledAt     DateTime?
+  cancelledById   Int?
+  createdAt       DateTime      @default(now())
+
+  client      Client?             @relation(fields: [clientId], references: [id])
+  supplier    Supplier?           @relation(fields: [supplierId], references: [id])
+  shift       Shift?              @relation(fields: [shiftId], references: [id])
+  allocations PaymentAllocation[]
+
+  @@index([clientId, createdAt])
+  @@index([supplierId, createdAt])
+  @@map("payments")
+}
+
+// Which bill a payment was applied to (oldest open bills first unless the user picks).
+model PaymentAllocation {
+  id         Int     @id @default(autoincrement())
+  paymentId  Int
+  saleId     Int?
+  purchaseId Int?
+  amount     Int
+  payment    Payment @relation(fields: [paymentId], references: [id])
+  sale       Sale?   @relation(fields: [saleId], references: [id])
+
+  @@index([paymentId])
+  @@map("payment_allocations")
+}
+
+// Append-only. A client balance = sum(debit) - sum(credit) of their rows (they owe us).
+// A supplier balance = sum(credit) - sum(debit) (we owe them).
+model LedgerEntry {
+  id         Int           @id @default(autoincrement())
+  partyType  PartyType
+  clientId   Int?
+  supplierId Int?
+  date       DateTime      @default(now())
+  debit      Int           @default(0)
+  credit     Int           @default(0)
+  docType    LedgerDocType
+  docId      Int?
+  note       String?
+  userId     Int?
+  client     Client?       @relation(fields: [clientId], references: [id])
+  supplier   Supplier?     @relation(fields: [supplierId], references: [id])
+
+  @@index([clientId, date])
+  @@index([supplierId, date])
+  @@map("ledger_entries")
+}
+
+model Expense {
+  id      Int         @id @default(autoincrement())
+  date    DateTime    @default(now())
+  head    String // rent, salaries, electricity, transport...
+  amount  Int
+  mode    PaymentMode @default(CASH)
+  note    String?
+  userId  Int
+  shiftId Int?
+  shift   Shift?      @relation(fields: [shiftId], references: [id])
+
+  @@map("expenses")
+}
+
+model Shift {
+  id           Int         @id @default(autoincrement())
+  userId       Int
+  deviceId     Int
+  openedAt     DateTime    @default(now())
+  openingCash  Int
+  closedAt     DateTime?
+  expectedCash Int?
+  countedCash  Int?
+  difference   Int?
+  handoverCash Int?
+  status       ShiftStatus @default(OPEN)
+  device       Device      @relation(fields: [deviceId], references: [id])
+  sales        Sale[]
+  payments     Payment[]
+  expenses     Expense[]
+
+  @@map("shifts")
+}
+
+// ───────────── Returns (RT-01..10) ─────────────
+
+model Return {
+  id           Int          @id @default(autoincrement())
+  number       String       @unique
+  saleId       Int // original bill; return without a bill is not in Phase 1 step 1
+  clientId     Int?
+  userId       Int
+  approvedById Int?
+  refundMethod RefundMethod
+  total        Int
+  note         String?
+  status       DocStatus    @default(ACTIVE)
+  createdAt    DateTime     @default(now())
+  sale         Sale         @relation(fields: [saleId], references: [id])
+  client       Client?      @relation(fields: [clientId], references: [id])
+  lines        ReturnLine[]
+  creditNote   CreditNote?
+
+  @@map("returns")
+}
+
+model ReturnLine {
+  id         Int           @id @default(autoincrement())
+  returnId   Int
+  saleLineId Int
+  itemId     Int
+  batchId    Int?
+  qty        Int
+  netPrice   Int // price after the original discount, per unit (RT-03)
+  condition  ItemCondition @default(GOOD)
+  reason     String?
+  ret        Return        @relation(fields: [returnId], references: [id])
+  saleLine   SaleLine      @relation(fields: [saleLineId], references: [id])
+  item       Item          @relation(fields: [itemId], references: [id])
+  batch      ItemBatch?    @relation(fields: [batchId], references: [id])
+
+  @@map("return_lines")
+}
+
+model CreditNote {
+  id        Int      @id @default(autoincrement())
+  number    String   @unique
+  clientId  Int
+  returnId  Int?     @unique
+  amount    Int
+  createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
+  ret       Return?  @relation(fields: [returnId], references: [id])
+
+  @@map("credit_notes")
+}
+
+// ───────────── Stock (ST-01..05, ST-09, ST-13) ─────────────
+
+// Append-only. Stock on hand of an item or batch = sum(qtyIn) - sum(qtyOut).
+model StockMovement {
+  id      Int          @id @default(autoincrement())
+  itemId  Int
+  batchId Int?
+  date    DateTime     @default(now())
+  qtyIn   Int          @default(0) // in base units
+  qtyOut  Int          @default(0)
+  docType StockDocType
+  docId   Int?
+  reason  String? // required for adjustments
+  userId  Int?
+  item    Item         @relation(fields: [itemId], references: [id])
+  batch   ItemBatch?   @relation(fields: [batchId], references: [id])
+
+  @@index([itemId, date])
+  @@index([batchId])
+  @@map("stock_movements")
+}
+
+// ───────────── Audit and settings (SE-01, CU-01) ─────────────
+
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  time      DateTime @default(now())
+  tableName String
+  recordId  String
+  action    String // create, update, cancel, login...
+  oldValue  Json?
+  newValue  Json?
+
+  @@index([tableName, recordId])
+  @@index([time])
+  @@map("audit_log")
+}
+
+model Setting {
+  key   String @id
+  value Json
+
+  @@map("settings")
 }
