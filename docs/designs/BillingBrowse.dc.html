@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Billing, previous and next bills</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B6B66}a:hover{color:#084F4B}
+input,select{font:inherit;color:inherit}
+button{font:inherit;cursor:pointer}
+.lb{font-size:12px;color:#5B6168}
+.in{border:1px solid #C9C5BB;border-radius:6px;padding:8px 10px;background:#FFFFFF;box-sizing:border-box}
+.num{font-family:'IBM Plex Mono',monospace;text-align:right}
+.btn{border:1px solid #C9C5BB;background:#FFFFFF;border-radius:6px;min-height:42px;padding:0 14px}
+.th{padding:6px 8px;font-weight:500;font-size:12px;color:#5B6168;text-align:left}
+.td{padding:8px;border-top:1px solid #ECE9E2}
+.ro{font-family:'IBM Plex Mono',monospace;padding:8px 0}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F3EF; color: #1B1F24; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.4">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<span style="font-weight: 700; font-size: 17px; padding: 14px 0">Nabeel Dar Book Depot</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1">
+<a href="Dashboard.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Dashboard</a>
+<a href="Main.dc.html" aria-current="page" style="color: #084F4B; font-weight: 600; text-decoration: none; padding: 14px 10px; border-bottom: 3px solid #0B6B66">Billing</a>
+<a href="Purchase.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Purchases</a>
+<a href="Items.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Items</a>
+<a href="ClientDiscounts.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Clients</a>
+<a href="Returns.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Returns</a>
+<a href="Ledger.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Ledgers</a>
+<a href="Stock.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Stock</a>
+<a href="Reports.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Reports</a>
+<a href="Settings.dc.html" style="color: #3D4248; text-decoration: none; padding: 14px 10px">Settings</a>
+</nav>
+<span style="color: #5B6168; font-size: 13px">Counter 1 · Usman</span>
+</div>
+</header>
+
+<nav aria-label="Billing mode" style="background: #FFFFFF; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 4px">
+<a href="Main.dc.html" style="padding: 10px 18px; margin-top: 6px; text-decoration: none; color: #1B1F24; background: #EEECE6; border-radius: 8px 8px 0 0">New bill</a>
+<a href="BillingBrowse.dc.html" aria-current="page" style="padding: 10px 18px; margin-top: 6px; text-decoration: none; color: #FFFFFF; background: #0B6B66; border-radius: 8px 8px 0 0; font-weight: 600">Previous / Next</a>
+<a href="BillingFind.dc.html" style="padding: 10px 18px; margin-top: 6px; text-decoration: none; color: #1B1F24; background: #EEECE6; border-radius: 8px 8px 0 0">Find bill</a>
+</div>
+</nav>
+
+<section aria-label="Step through bills" style="background: #FAF9F6; border-bottom: 1px solid #DEDBD3">
+<div style="max-width: 1440px; margin: 0 auto; padding: 12px 20px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px">
+<div style="display: flex; flex-direction: column; gap: 3px"><label for="flt" class="lb">Show</label><select id="flt" class="in" style="min-height: 42px"><option>All bills</option><option>Retail only</option><option>Wholesale only</option><option>Credit only</option><option>Quotations</option><option>This counter only</option></select></div>
+<div style="display: flex; align-items: center; gap: 6px">
+<button class="btn" aria-label="First bill">⏮ First</button>
+<button class="btn" aria-label="Previous bill" style="border: 2px solid #0B6B66; font-weight: 600">◀ Previous (PgUp)</button>
+<button class="btn" aria-label="Next bill">Next (PgDn) ▶</button>
+<button class="btn" aria-label="Last bill">Last ⏭</button>
+</div>
+<span style="color: #5B6168; padding-bottom: 10px">Bill 41 of 42 today</span>
+</div>
+</section>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 16px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+
+<div role="status" style="background: #FBEFD9; border: 1px solid #E3C48A; color: #5C3B00; border-radius: 10px; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px">
+<strong style="font-size: 15px">Viewing saved bill C1-1041 · read-only</strong>
+<span>Saved 10 Oct 2026, 13:52 by Usman, Counter 1</span>
+<div style="display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap">
+<button class="btn">Reprint</button>
+<button class="btn">Send on WhatsApp</button>
+<a href="Returns.dc.html" class="btn" style="display: inline-flex; align-items: center; text-decoration: none; color: #1B1F24">Return items</a>
+<button class="btn">Copy to new bill</button>
+<button class="btn" style="border-color: #C98A1A; font-weight: 600">Edit (manager)</button>
+<button class="btn" style="border-color: #A33A2A; color: #8E2F21">Cancel bill (manager)</button>
+</div>
+</div>
+
+<section aria-label="Bill details" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 8px 32px">
+<div style="display: flex; flex-direction: column"><span class="lb">Bill no.</span><span class="ro" style="font-weight: 600; font-size: 16px">C1-1041</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Type</span><span style="padding: 8px 0">Sale · Retail</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Date</span><span style="padding: 8px 0">10 Oct 2026</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Payment</span><span style="padding: 8px 0">Cash</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Delivery</span><span style="padding: 8px 0">Counter</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Client</span><span style="padding: 8px 0">Walk-in · 0333-[number]</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Remarks</span><span style="padding: 8px 0; color: #5B6168">—</span></div>
+</section>
+
+<section aria-label="Bill lines" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px 16px">
+<div style="overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 720px">
+<thead><tr><th class="th" style="width: 28px">Sr</th><th class="th">Code</th><th class="th">Item</th><th class="th" style="text-align: right">Qty</th><th class="th">Unit</th><th class="th" style="text-align: right">Price</th><th class="th" style="text-align: right">Disc</th><th class="th" style="text-align: right">Gross</th><th class="th" style="text-align: right">Net</th></tr></thead>
+<tbody>
+<tr><td class="td" style="color: #5B6168">1</td><td class="td" style="font-family: 'IBM Plex Mono', monospace">1103</td><td class="td">Oxford Science 8</td><td class="td num">1</td><td class="td">Pcs</td><td class="td num">1,280</td><td class="td num">0%</td><td class="td num">1,280</td><td class="td num">1,280</td></tr>
+<tr><td class="td" style="color: #5B6168">2</td><td class="td" style="font-family: 'IBM Plex Mono', monospace">2215</td><td class="td">Paramount English 3</td><td class="td num">2</td><td class="td">Pcs</td><td class="td num">520</td><td class="td num">0%</td><td class="td num">1,040</td><td class="td num">1,040</td></tr>
+<tr><td class="td" style="color: #5B6168">3</td><td class="td" style="font-family: 'IBM Plex Mono', monospace">7012</td><td class="td">Register A4, 200 pages</td><td class="td num">4</td><td class="td">Pcs</td><td class="td num">220</td><td class="td num">0%</td><td class="td num">880</td><td class="td num">880</td></tr>
+<tr><td class="td" style="color: #5B6168">4</td><td class="td" style="font-family: 'IBM Plex Mono', monospace">5031</td><td class="td">Dollar Gel Pen Blue</td><td class="td num">5</td><td class="td">Pcs</td><td class="td num">30</td><td class="td num">0%</td><td class="td num">150</td><td class="td num">150</td></tr>
+</tbody>
+<tfoot><tr style="border-top: 2px solid #DEDBD3; font-weight: 600"><td class="td" colspan="3">No. of titles: 4</td><td class="td num">12</td><td class="td" colspan="3"></td><td class="td num">3,350</td><td class="td num">3,350</td></tr></tfoot>
+</table>
+</div>
+</section>
+
+<section aria-label="Totals" style="background: #FFFFFF; border: 1px solid #DEDBD3; border-radius: 10px; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: flex-end">
+<div style="display: flex; flex-direction: column"><span class="lb">Gross total</span><span class="ro">3,350</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Bill discount</span><span class="ro">− 150</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Freight</span><span class="ro">0</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Received</span><span class="ro">3,200 cash</span></div>
+<div style="display: flex; flex-direction: column"><span class="lb">Printed</span><span style="padding: 8px 0">80 mm · English</span></div>
+<div style="display: flex; flex-direction: column; margin-left: auto; text-align: right"><span style="font-size: 13px; color: #5B6168">Grand total</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600">Rs. 3,200</span></div>
+</section>
+<p style="margin: 0; font-size: 13px; color: #5B6168">Nothing on this screen can be typed over. Edit opens the bill for changes after a manager approves; the old version stays in the audit log. Cancel keeps the bill number and reverses its stock and money.</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

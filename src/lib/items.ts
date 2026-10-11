@@ -9,16 +9,20 @@ const fail = (error: string): { ok: false; error: string } => ({ ok: false, erro
 // The cashier types item codes and scans barcodes into the same field, so a short code and
 // a barcode must never be the same text on two different items. A code is also never reused.
 
-const CODE_FORMAT = /^[A-Za-z0-9._-]{1,20}$/;
+// OS-01: letters and numbers, up to 12 characters (Ked11, HS8, 1045). Not case-sensitive.
+export const CODE_MAX_LENGTH = 12;
+const CODE_FORMAT = /^[A-Za-z0-9]{1,12}$/;
+export const codeKeyOf = (code: string) => code.toLowerCase();
 const BARCODE_FORMAT = /^[^\s]{3,64}$/;
 
 // What already owns this exact text as a code, a code in the past, a barcode or a batch barcode.
 async function whoOwnsText(db: Db, text: string) {
   const [item, oldCode, barcode, batch] = await Promise.all([
-    db.item.findUnique({ where: { code: text }, select: { id: true, name: true } }),
-    db.itemCode.findUnique({ where: { code: text } }),
-    db.itemBarcode.findUnique({ where: { barcode: text }, include: { item: { select: { id: true, name: true } } } }),
-    db.itemBatch.findUnique({ where: { barcode: text }, include: { item: { select: { id: true, name: true } } } }),
+    db.item.findUnique({ where: { codeKey: codeKeyOf(text) }, select: { id: true, name: true } }),
+    db.itemCode.findUnique({ where: { codeKey: codeKeyOf(text) } }),
+    // Barcodes compare ignoring case too, because a typed code and a scanned barcode share one field.
+    db.itemBarcode.findFirst({ where: { barcode: { equals: text, mode: "insensitive" } }, include: { item: { select: { id: true, name: true } } } }),
+    db.itemBatch.findFirst({ where: { barcode: { equals: text, mode: "insensitive" } }, include: { item: { select: { id: true, name: true } } } }),
   ]);
   return {
     asCode: item,
@@ -30,7 +34,7 @@ async function whoOwnsText(db: Db, text: string) {
 
 // Returns an error message, or null when the code is free to use for this item.
 export async function checkCode(db: Db, code: string, itemId?: number): Promise<string | null> {
-  if (!CODE_FORMAT.test(code)) return "Item code: 1-20 letters, numbers, dot, dash or underscore, no spaces.";
+  if (!CODE_FORMAT.test(code)) return "Item code: letters and numbers only, up to 12 characters (for example Ked11 or HS8).";
   const o = await whoOwnsText(db, code);
   if (o.asCode && o.asCode.id !== itemId) return `The code ${code} is already used by "${o.asCode.name}".`;
   if (o.asOldCodeOfItemId !== null && o.asOldCodeOfItemId !== itemId) {
@@ -78,7 +82,7 @@ export async function nextItemCode(db: Db): Promise<string> {
 export async function findItemByCodeOrBarcode(db: Db, text: string) {
   const t = text.trim();
   if (!t) return null;
-  const byCode = await db.item.findUnique({ where: { code: t } });
+  const byCode = await db.item.findUnique({ where: { codeKey: codeKeyOf(t) } });
   if (byCode) return byCode;
   const byBarcode = await db.itemBarcode.findUnique({ where: { barcode: t }, include: { item: true } });
   if (byBarcode) return byBarcode.item;
@@ -161,6 +165,7 @@ export async function createItem(
   const item = await db.item.create({
     data: {
       code,
+      codeKey: codeKeyOf(code),
       name: input.name.trim(),
       nameUrdu: blank(input.nameUrdu),
       searchSpelling: blank(input.searchSpelling),
@@ -180,7 +185,7 @@ export async function createItem(
       units: { create: (input.units ?? []).map((u) => ({ unitName: u.unitName.trim(), factor: u.factor })) },
     },
   });
-  await db.itemCode.create({ data: { code, itemId: item.id } });
+  await db.itemCode.create({ data: { code, codeKey: codeKeyOf(code), itemId: item.id } });
   await writeAudit(db, {
     userId: actorId,
     tableName: "items",
@@ -217,7 +222,7 @@ export async function updateItem(
   if (isbn && isbn !== existing.isbn) {
     const owner = await db.itemBarcode.findUnique({ where: { barcode: isbn } });
     if (owner && owner.itemId !== id) return fail((await checkBarcode(db, isbn, id)) ?? "That ISBN is already a barcode.");
-    const asCode = await db.item.findUnique({ where: { code: isbn } });
+    const asCode = await db.item.findUnique({ where: { codeKey: codeKeyOf(isbn) } });
     if (asCode && asCode.id !== id) return fail(`The ISBN ${isbn} is the item code of "${asCode.name}".`);
   }
 
@@ -226,6 +231,7 @@ export async function updateItem(
     nameUrdu: blank(input.nameUrdu),
     searchSpelling: blank(input.searchSpelling),
     code,
+    codeKey: codeKeyOf(code),
     isbn,
     author: blank(input.author),
     subject: blank(input.subject),
@@ -250,7 +256,7 @@ export async function updateItem(
   if (Object.keys(newValue).length === 0) return { ok: true, value: undefined };
 
   await db.item.update({ where: { id }, data: next });
-  if (code !== existing.code) await db.itemCode.create({ data: { code, itemId: id } });
+  if (codeKeyOf(code) !== existing.codeKey) await db.itemCode.create({ data: { code, codeKey: codeKeyOf(code), itemId: id } });
   if (isbn && isbn !== existing.isbn && !(await db.itemBarcode.findUnique({ where: { barcode: isbn } }))) {
     await db.itemBarcode.create({ data: { itemId: id, barcode: isbn, label: "ISBN" } });
   }

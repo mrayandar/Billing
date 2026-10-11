@@ -42,6 +42,9 @@ Web-based retail and wholesale billing for a book and stationery shop. Used at s
 - Each bill can print in English or Urdu; Urdu uses the item's Urdu name, falling back to the English name.
 - Record who did what in the audit log for prices, discounts, bills, payments and stock adjustments.
 
+- **Item codes** may contain letters and numbers (e.g. Ked11, HS8), up to 12 characters, not case-sensitive when typed. Keep existing codes on import; auto-number only when the code is blank.
+- Everything the shop's current billing software does must also work here: see "Features kept from the current billing software" (OS-01 to OS-15) in the requirements.
+
 ## Screens and usability
 - Every screen must work on computer, tablet and phone. Stack columns on narrow screens, collapse the top menu into a menu button on phones, and let wide tables scroll or turn into cards.
 - Buttons and inputs at least 44 px tall on touch screens.

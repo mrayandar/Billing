@@ -4,7 +4,9 @@ Each `.dc.html` file is one screen from the design canvas. Read them as layout a
 
 | File | Screen |
 | --- | --- |
-| Main.dc.html | Billing, computer |
+| Main.dc.html | Billing, New bill tab |
+| BillingBrowse.dc.html | Billing, Previous / Next tab (old bill read-only) |
+| BillingFind.dc.html | Billing, Find bill tab |
 | BillingTry.dc.html | Billing, working keyboard flow (its script shows the intended behaviour) |
 | Phone.dc.html | Billing, phone |
 | Dashboard.dc.html | Dashboard |

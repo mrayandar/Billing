@@ -26,6 +26,28 @@ These decisions, made while designing the screens, override anything older in th
 | Responsive | Every screen works on computer, tablet and phone. Columns stack on narrow screens, the top menu collapses into a menu button on phones, wide tables scroll sideways or turn into cards, and buttons stay at least 44 px tall for touch. |
 | Who builds it | The owner, using Claude Code, phase by phase from this document and the screen designs. |
 
+## Features kept from the current billing software (11 Oct 2026)
+
+Everything the shop's current billing screen does must work in the new system from Phase 1. These requirements come from the current software and override anything that conflicts.
+
+| ID | Requirement | Details |
+| --- | --- | --- |
+| OS-01 | Letter-and-number item codes | Codes like Ked11, HS8 or Oi9, up to 12 characters, not case-sensitive when typed. Existing codes are kept when items are imported. A number is auto-assigned only when the code is left blank. Codes stay unique, are never reused, and never equal another item's barcode. |
+| OS-02 | Open past bills | Billing has three tabs, as in the current software (Alt+1/2/3). New bill: make a bill. Previous / Next: step through saved bills with First / Previous / Next / Last and PgUp / PgDn, filtered by all, retail, wholesale, credit, quotations or this counter. Find bill: search by bill number or scanned receipt barcode, client, phone, date range, approximate amount, item, type and paid or open; a bill number plus Enter opens it at once. Old bills always open read-only under a "viewing saved bill" banner, with Reprint, WhatsApp, Return items and Copy to new bill; Edit and Cancel need a manager and are logged (SE-02, SE-03). |
+| OS-03 | Bill header fields | Type (sale, quotation, sales order), date, cash or credit, delivery mode (counter, delivery, courier), store (sale point or godown), and an "Update stock" switch (on by default; off only with permission). |
+| OS-04 | Client header | Client code and name, phone, previous balance, balance with this bill, and credit limit, all visible while billing. |
+| OS-05 | Fill from a list | Add all items at once from a school book list (syllabus), a quotation or sales order, or a purchase, using the client's prices. School book lists (RS-13) move to Phase 1. |
+| OS-06 | Change discount on many lines | Set one discount % on all lines, one company's lines, or selected lines in one action. Optionally also save it as the client's company discount. |
+| OS-07 | Where prices come from | Per bill, fill price and discount from the client's rules (default), from the last sale of that item to this client, or base price with no discount. Replaces the old Skip Bill History and Skip Disc History ticks. |
+| OS-08 | Negative stock | An "Allow sale below zero stock" tick, controlled by a permission and a setting. Stock below zero shows in red. |
+| OS-09 | Repeat scan | Optional setting: scanning or typing the same code again adds to that line's quantity instead of a new line. |
+| OS-10 | Cost and margin while billing | Cost price and margin % of the current item, shown only to users with cost.view. |
+| OS-11 | Bill totals | No. of titles and total quantity, gross total, line discounts, bill discount %, freight or delivery, rounding, grand total, received now, and new balance. |
+| OS-12 | Print choices | A5 invoice, 80 mm thermal, or A5 without header for pre-printed paper; English or Urdu; a "Without balance" tick that hides previous and new balance on that printout; send on WhatsApp or SMS. |
+| OS-13 | Remarks | A remarks box per bill, printed on the bill. |
+| OS-14 | Item search filters | Search by company and by category together. |
+| OS-15 | Data from the old software | Import items with their existing codes, clients with codes and balances, and suppliers with balances from an export of the current software. Opening stock comes from a physical count, not from the old figures, because the old system allowed negative stock. |
+
 ## 1. Purpose and scope
 
 The system replaces manual billing and registers for one shop selling books of all kinds and stationery, to walk-in customers (retail) and account clients (wholesale).

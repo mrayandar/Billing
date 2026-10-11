@@ -8,6 +8,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const links = [
     { href: "/", label: "Home", show: true },
     { href: "/items", label: "Items", show: true },
+    { href: "/clients", label: "Clients", show: true },
     { href: "/users", label: "Users", show: can(user, "users.manage") },
   ].filter((l) => l.show);
 

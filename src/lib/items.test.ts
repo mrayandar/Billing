@@ -55,9 +55,9 @@ describe("item codes", () => {
   it("lets the owner type a code, and keeps codes unique", async () => {
     await inRollback(async (tx) => {
       const { actor, base, make } = await setup(tx);
-      const a = await make({ code: "ZX-1" });
-      expect(a.code).toBe("ZX-1");
-      const dup = await createItem(tx, actor.id, base({ name: "Zyx other", code: "ZX-1" }), { canSetCost: false });
+      const a = await make({ code: "ZX1" });
+      expect(a.code).toBe("ZX1");
+      const dup = await createItem(tx, actor.id, base({ name: "Zyx other", code: "ZX1" }), { canSetCost: false });
       expect(dup).toMatchObject({ ok: false });
       const bad = await createItem(tx, actor.id, base({ code: "has space" }), { canSetCost: false });
       expect(bad).toMatchObject({ ok: false });
@@ -77,16 +77,16 @@ describe("item codes", () => {
   it("never reuses a code, even after the item changed its code or was removed", async () => {
     await inRollback(async (tx) => {
       const { actor, base, make } = await setup(tx);
-      const a = await make({ code: "ZX-OLD", name: "Zyx renamed" });
-      await updateItem(tx, actor.id, a.id, base({ name: "Zyx renamed", code: "ZX-NEW" }), { canSetCost: false });
-      const reuse = await createItem(tx, actor.id, base({ name: "Zyx newcomer", code: "ZX-OLD" }), { canSetCost: false });
+      const a = await make({ code: "ZXOLD", name: "Zyx renamed" });
+      await updateItem(tx, actor.id, a.id, base({ name: "Zyx renamed", code: "ZXNEW" }), { canSetCost: false });
+      const reuse = await createItem(tx, actor.id, base({ name: "Zyx newcomer", code: "ZXOLD" }), { canSetCost: false });
       expect(reuse).toMatchObject({ ok: false });
       expect((reuse as { error: string }).error).toMatch(/never reused/);
 
-      const b = await make({ code: "ZX-GONE", name: "Zyx removed" });
+      const b = await make({ code: "ZXGONE", name: "Zyx removed" });
       await tx.itemBarcode.deleteMany({ where: { itemId: b.id } });
       await tx.item.delete({ where: { id: b.id } });
-      const again = await createItem(tx, actor.id, base({ name: "Zyx again", code: "ZX-GONE" }), { canSetCost: false });
+      const again = await createItem(tx, actor.id, base({ name: "Zyx again", code: "ZXGONE" }), { canSetCost: false });
       expect(again).toMatchObject({ ok: false });
     });
   });
@@ -94,15 +94,96 @@ describe("item codes", () => {
   it("changes a code only to a free one, and records the change", async () => {
     await inRollback(async (tx) => {
       const { actor, base, make } = await setup(tx);
-      const a = await make({ code: "ZX-A", name: "Zyx a" });
-      await make({ code: "ZX-B", name: "Zyx b" });
-      const taken = await updateItem(tx, actor.id, a.id, base({ name: "Zyx a", code: "ZX-B" }), { canSetCost: false });
+      const a = await make({ code: "ZXA", name: "Zyx a" });
+      await make({ code: "ZXB", name: "Zyx b" });
+      const taken = await updateItem(tx, actor.id, a.id, base({ name: "Zyx a", code: "ZXB" }), { canSetCost: false });
       expect(taken).toMatchObject({ ok: false });
-      const ok = await updateItem(tx, actor.id, a.id, base({ name: "Zyx a", code: "ZX-C" }), { canSetCost: false });
+      const ok = await updateItem(tx, actor.id, a.id, base({ name: "Zyx a", code: "ZXC" }), { canSetCost: false });
       expect(ok).toMatchObject({ ok: true });
       const row = await tx.auditLog.findFirstOrThrow({ where: { tableName: "items", recordId: String(a.id), action: "update" } });
-      expect(row.oldValue).toEqual({ code: "ZX-A" });
-      expect(row.newValue).toEqual({ code: "ZX-C" });
+      expect(row.oldValue).toEqual({ code: "ZXA" });
+      expect(row.newValue).toEqual({ code: "ZXC" });
+    });
+  });
+});
+
+describe("letter-and-number item codes (OS-01)", () => {
+  it("accepts codes like Ked11, HS8 and Oi9, keeping the letters as typed", async () => {
+    await inRollback(async (tx) => {
+      const { make } = await setup(tx);
+      for (const code of ["Ked11", "HS8", "Oi9", "ABCDEFGHIJ12"]) {
+        const item = await make({ code, name: "Zyx " + code });
+        expect(item.code).toBe(code);
+      }
+    });
+  });
+
+  it("rejects codes longer than 12 characters, or with spaces or symbols", async () => {
+    await inRollback(async (tx) => {
+      const { actor, base } = await setup(tx);
+      for (const code of ["ABCDEFGHIJ123", "has space", "A-1", "A_1", "A.1"]) {
+        const r = await createItem(tx, actor.id, base({ code }), { canSetCost: false });
+        expect(r).toMatchObject({ ok: false });
+      }
+    });
+  });
+
+  it("treats upper and lower case as the same code", async () => {
+    await inRollback(async (tx) => {
+      const { actor, base, make } = await setup(tx);
+      const a = await make({ code: "Ked11", name: "Zyx Ked" });
+      for (const typed of ["ked11", "KED11", "kEd11"]) {
+        const r = await createItem(tx, actor.id, base({ name: "Zyx dup " + typed, code: typed }), { canSetCost: false });
+        expect(r).toMatchObject({ ok: false });
+      }
+      // typing it in any case finds the item
+      for (const typed of ["Ked11", "ked11", "KED11"]) {
+        expect((await findItemByCodeOrBarcode(tx, typed))?.id).toBe(a.id);
+        expect((await searchItems(tx, { q: typed, chip: "all" })).items[0].id).toBe(a.id);
+      }
+    });
+  });
+
+  it("lets an item change only the capital letters of its own code", async () => {
+    await inRollback(async (tx) => {
+      const { actor, base, make } = await setup(tx);
+      const a = await make({ code: "Ked11", name: "Zyx case" });
+      expect(await updateItem(tx, actor.id, a.id, base({ name: "Zyx case", code: "KED11" }), { canSetCost: false })).toMatchObject({ ok: true });
+      expect((await tx.item.findUniqueOrThrow({ where: { id: a.id } })).code).toBe("KED11");
+    });
+  });
+
+  it("gives an automatic number only when the code is left blank", async () => {
+    await inRollback(async (tx) => {
+      const { make } = await setup(tx);
+      const blank = await make({ code: "", name: "Zyx blank" });
+      expect(blank.code).toMatch(/^[0-9]+$/);
+      expect(Number(blank.code)).toBeGreaterThanOrEqual(1001);
+      const typed = await make({ code: "HS8", name: "Zyx typed" });
+      expect(typed.code).toBe("HS8");
+    });
+  });
+
+  it("never lets a code match a barcode, whatever the capital letters", async () => {
+    await inRollback(async (tx) => {
+      const { actor, base, make } = await setup(tx);
+      await make({ name: "Zyx barcode holder", extraBarcodes: ["AbC12345"] });
+      const r = await createItem(tx, actor.id, base({ name: "Zyx clash", code: "abc12345" }), { canSetCost: false });
+      expect(r).toMatchObject({ ok: false });
+      const other = await make({ code: "Qq77", name: "Zyx other" });
+      expect(await addBarcode(tx, actor.id, (await make({ name: "Zyx third" })).id, "QQ77")).toMatchObject({ ok: false });
+      expect(other.code).toBe("Qq77");
+    });
+  });
+
+  it("never reuses a code even when only the capital letters differ", async () => {
+    await inRollback(async (tx) => {
+      const { actor, base, make } = await setup(tx);
+      const a = await make({ code: "Old77", name: "Zyx moves" });
+      await updateItem(tx, actor.id, a.id, base({ name: "Zyx moves", code: "New77" }), { canSetCost: false });
+      const r = await createItem(tx, actor.id, base({ name: "Zyx taker", code: "OLD77" }), { canSetCost: false });
+      expect(r).toMatchObject({ ok: false });
+      expect((r as { error: string }).error).toMatch(/never reused/);
     });
   });
 });
@@ -151,7 +232,7 @@ describe("barcodes are unique, and never equal to an item code", () => {
   it("refuses a barcode that equals another item's short code", async () => {
     await inRollback(async (tx) => {
       const { actor, make } = await setup(tx);
-      const a = await make({ code: "ZC-4321", name: "Zyx has code" });
+      const a = await make({ code: "ZC4321", name: "Zyx has code" });
       const b = await make({ name: "Zyx wants barcode" });
       const r = await addBarcode(tx, actor.id, b.id, a.code);
       expect(r).toMatchObject({ ok: false });
@@ -162,9 +243,9 @@ describe("barcodes are unique, and never equal to an item code", () => {
   it("refuses to change a code to something that is another item's barcode", async () => {
     await inRollback(async (tx) => {
       const { actor, base, make } = await setup(tx);
-      await make({ name: "Zyx barcode owner", extraBarcodes: ["ZD-9999"] });
+      await make({ name: "Zyx barcode owner", extraBarcodes: ["ZD9999"] });
       const b = await make({ name: "Zyx changer" });
-      const r = await updateItem(tx, actor.id, b.id, base({ name: "Zyx changer", code: "ZD-9999" }), { canSetCost: false });
+      const r = await updateItem(tx, actor.id, b.id, base({ name: "Zyx changer", code: "ZD9999" }), { canSetCost: false });
       expect(r).toMatchObject({ ok: false });
     });
   });
@@ -172,8 +253,8 @@ describe("barcodes are unique, and never equal to an item code", () => {
   it("allows an item's own barcode to equal its own code", async () => {
     await inRollback(async (tx) => {
       const { make } = await setup(tx);
-      const a = await make({ code: "ZE-1", name: "Zyx own" });
-      expect(await tx.itemBarcode.count({ where: { itemId: a.id, barcode: "ZE-1" } })).toBe(1);
+      const a = await make({ code: "ZE1", name: "Zyx own" });
+      expect(await tx.itemBarcode.count({ where: { itemId: a.id, barcode: "ZE1" } })).toBe(1);
     });
   });
 });

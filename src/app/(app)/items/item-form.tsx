@@ -63,8 +63,8 @@ export function ItemForm({
       <Field label="English spelling of the Urdu title" hint="used to find it by search" className="sm:col-span-2">
         <input name="searchSpelling" defaultValue={item?.searchSpelling ?? ""} placeholder="e.g. Bang-e-Dra" className="input" />
       </Field>
-      <Field label="Item code" hint={creating ? "leave empty for the next number" : undefined}>
-        <input name="code" defaultValue={item?.code} autoComplete="off" className="input font-mono" />
+      <Field label="Item code" hint={creating ? "letters and numbers, up to 12; empty = next number" : "up to 12 letters and numbers"}>
+        <input name="code" defaultValue={item?.code} maxLength={12} autoComplete="off" autoCapitalize="none" className="input font-mono" />
       </Field>
       <Field label="ISBN">
         <input name="isbn" defaultValue={item?.isbn ?? ""} autoComplete="off" className="input font-mono" />

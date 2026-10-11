@@ -139,6 +139,7 @@ async function main() {
     const item = await db.item.create({
       data: {
         code: s.code,
+        codeKey: s.code.toLowerCase(),
         name: s.name,
         nameUrdu: s.nameUrdu,
         companyId: company[s.company],
@@ -152,6 +153,7 @@ async function main() {
       },
     });
     itemId[s.code] = item.id;
+    await db.itemCode.create({ data: { code: s.code, codeKey: s.code.toLowerCase(), itemId: item.id } });
     for (const b of s.batches) {
       const batch = await db.itemBatch.create({
         data: { itemId: item.id, price: rs(b.price), receivedDate: new Date(b.received) },
@@ -173,7 +175,8 @@ async function main() {
   // ── Clients ──
   const ali = await db.client.create({
     data: {
-      code: "CL-0001",
+      code: "1",
+      codeKey: "1",
       name: "Ali Traders",
       type: "WHOLESALE",
       creditLimit: rs(100000),
@@ -183,7 +186,8 @@ async function main() {
   });
   await db.client.create({
     data: {
-      code: "CL-0412",
+      code: "412",
+      codeKey: "412",
       name: "Madina Book Centre",
       type: "WHOLESALE",
       creditLimit: rs(100000),
@@ -200,9 +204,9 @@ async function main() {
   }
   await db.clientItemRule.createMany({
     data: [
-      { clientId: ali.id, itemId: itemId["1045"], discountBp: pct(12), setFrom: "Owner", updatedById: owner.id },
-      { clientId: ali.id, itemId: itemId["1240"], specialPrice: rs(430), discountBp: pct(15), setFrom: "Bill C1-0987", updatedById: owner.id },
-      { clientId: ali.id, itemId: itemId["2215"], discountBp: pct(6), setFrom: "Manager", updatedById: owner.id },
+      { clientId: ali.id, itemId: itemId["1045"], discountBp: pct(12), setById: owner.id },
+      { clientId: ali.id, itemId: itemId["1240"], specialPrice: rs(430), discountBp: pct(15), sourceBillNo: "C1-0987", setById: owner.id },
+      { clientId: ali.id, itemId: itemId["2215"], discountBp: pct(6), setById: owner.id },
     ],
   });
 

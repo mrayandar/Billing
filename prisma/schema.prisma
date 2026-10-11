@@ -62,6 +62,7 @@ enum SaleType {
 enum DiscountSource {
   BOOK_RULE
   COMPANY_RULE
+  LAST_SALE // copied from the last sale to this client (OS-07)
   MANUAL
   NONE
 }
@@ -219,6 +220,8 @@ model Category {
 model Item {
   id             Int        @id @default(autoincrement())
   code           String     @unique // short code typed at the counter, e.g. "1045"
+  // Lower-case copy of the code: codes are not case-sensitive (Ked11 = KED11).
+  codeKey        String     @unique
   name           String
   nameUrdu       String? // printed when a bill is printed in Urdu
   searchSpelling String? // English spelling of an Urdu title, for search (PM-13)
@@ -263,6 +266,7 @@ model Item {
 // renamed away from it or removed (BE-01).
 model ItemCode {
   code      String   @id
+  codeKey   String   @unique // lower-case copy, so Ked11 and KED11 count as the same code
   itemId    Int
   createdAt DateTime @default(now())
 
@@ -314,7 +318,8 @@ model ItemBatch {
 
 model Client {
   id              Int             @id @default(autoincrement())
-  code            String          @unique // e.g. "CL-0412"
+  code            String          @unique // plain number or letters+numbers, e.g. "64", up to 12
+  codeKey         String          @unique // lower-case copy: codes are not case-sensitive
   name            String
   type            ClientType      @default(WHOLESALE)
   contactPerson   String?
@@ -359,14 +364,16 @@ model Client {
 
 // Discount % for every item of one company, for one client.
 model ClientCompanyDiscount {
-  id          Int      @id @default(autoincrement())
-  clientId    Int
-  companyId   Int
-  discountBp  Int // basis points
-  updatedAt   DateTime @updatedAt
-  updatedById Int?
-  client      Client   @relation(fields: [clientId], references: [id])
-  company     Company  @relation(fields: [companyId], references: [id])
+  id           Int      @id @default(autoincrement())
+  clientId     Int
+  companyId    Int
+  discountBp   Int // basis points
+  active       Boolean  @default(true) // switched off, never deleted
+  sourceBillNo String? // bill it was saved from, when saved from a bill
+  updatedAt    DateTime @updatedAt
+  updatedById  Int?
+  client       Client   @relation(fields: [clientId], references: [id])
+  company      Company  @relation(fields: [companyId], references: [id])
 
   @@unique([clientId, companyId])
   @@map("client_company_discounts")
@@ -380,9 +387,10 @@ model ClientItemRule {
   itemId       Int
   specialPrice Int? // paisa
   discountBp   Int?
-  setFrom      String? // e.g. "Bill C1-0987" when saved from a bill with the tick
-  updatedAt    DateTime @updatedAt
-  updatedById  Int?
+  active       Boolean  @default(true) // switched off, never deleted
+  sourceBillNo String? // bill it was saved from (tick on the bill), e.g. "C1-0987"
+  setById      Int?
+  setAt        DateTime @default(now())
   client       Client   @relation(fields: [clientId], references: [id])
   item         Item     @relation(fields: [itemId], references: [id])
 
