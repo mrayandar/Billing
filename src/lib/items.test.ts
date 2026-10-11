@@ -222,8 +222,8 @@ describe("barcodes are unique, and never equal to an item code", () => {
   it("refuses a short code that equals another item's barcode", async () => {
     await inRollback(async (tx) => {
       const { actor, base, make } = await setup(tx);
-      await make({ extraBarcodes: ["8901234567890"] });
-      const r = await createItem(tx, actor.id, base({ name: "Zyx clash", code: "8901234567890" }), { canSetCost: false });
+      await make({ extraBarcodes: ["890123456789"] });
+      const r = await createItem(tx, actor.id, base({ name: "Zyx clash", code: "890123456789" }), { canSetCost: false });
       expect(r).toMatchObject({ ok: false });
       expect((r as { error: string }).error).toMatch(/barcode/);
     });
