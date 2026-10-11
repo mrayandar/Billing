@@ -1,0 +1,4 @@
+{
+  "note": "Database tests for the step being built. npm test runs the fast tests plus these. Change this list at the start of each step; npm run test:all runs everything.",
+  "globs": ["src/lib/clients.db.test.ts"]
+}

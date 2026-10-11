@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run",
+    "test": "vitest run --project fast --project current",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
     "postinstall": "prisma generate",
-    "db:migrate:test": "node scripts/migrate-test.mjs"
+    "db:migrate:test": "node scripts/migrate-test.mjs",
+    "test:all": "vitest run --project fast --project db",
+    "test:fast": "vitest run --project fast"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",

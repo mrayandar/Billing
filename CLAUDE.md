@@ -19,7 +19,8 @@ Web-based retail and wholesale billing for a book and stationery shop. Used at s
 
 ## Commands
 - Run the app: `npm run dev`
-- Run tests: `npm test`
+- Run tests: `npm test` (fast tests + the current step's database tests; change the list in `vitest.current-step.json` each step)
+- Run all tests before a merge: `npm run test:all` (about 8 minutes; needs the Neon test branch)
 - Database changes: `npx prisma migrate dev` (or `npm run db:migrate`), then `npm run db:migrate:test` for the test branch
 - Sample data: `npm run db:seed` (skips if users already exist)
 
